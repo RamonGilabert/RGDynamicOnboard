@@ -84,15 +84,12 @@
 		F62635631AB210E900E1EF4D /* RGDynamicOnboard */ = {
 			isa = PBXGroup;
 			children = (
-				F62635681AB210E900E1EF4D /* AppDelegate.h */,
-				F62635691AB210E900E1EF4D /* AppDelegate.m */,
 				F626356B1AB210E900E1EF4D /* ViewController.h */,
 				F626356C1AB210E900E1EF4D /* ViewController.m */,
 				F626358A1AB213C200E1EF4D /* RGDynamicOnboard.h */,
 				F626358B1AB213C200E1EF4D /* RGDynamicOnboard.m */,
 				F626356E1AB210E900E1EF4D /* Main.storyboard */,
 				F62635711AB210E900E1EF4D /* Images.xcassets */,
-				F62635731AB210E900E1EF4D /* LaunchScreen.xib */,
 				F62635641AB210E900E1EF4D /* Supporting Files */,
 			);
 			path = RGDynamicOnboard;
@@ -101,6 +98,9 @@
 		F62635641AB210E900E1EF4D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F62635731AB210E900E1EF4D /* LaunchScreen.xib */,
+				F62635681AB210E900E1EF4D /* AppDelegate.h */,
+				F62635691AB210E900E1EF4D /* AppDelegate.m */,
 				F62635651AB210E900E1EF4D /* Info.plist */,
 				F62635661AB210E900E1EF4D /* main.m */,
 			);
