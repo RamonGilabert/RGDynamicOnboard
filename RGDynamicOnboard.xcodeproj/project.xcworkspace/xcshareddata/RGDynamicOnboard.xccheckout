@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>2EA3DE7F-DD9D-487D-BF56-9DF33CD8EB80</string>
+	<key>IDESourceControlProjectName</key>
+	<string>RGDynamicOnboard</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>AFD4C142060EF37CB696A6CBA6DF63F6D6657DD9</key>
+		<string>https://github.com/RamonGilabert/RGDynamicOnboard.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>RGDynamicOnboard.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>AFD4C142060EF37CB696A6CBA6DF63F6D6657DD9</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/RamonGilabert/RGDynamicOnboard.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>AFD4C142060EF37CB696A6CBA6DF63F6D6657DD9</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>AFD4C142060EF37CB696A6CBA6DF63F6D6657DD9</string>
+			<key>IDESourceControlWCCName</key>
+			<string>RGDynamicOnboard</string>
+		</dict>
+	</array>
+</dict>
+</plist>
