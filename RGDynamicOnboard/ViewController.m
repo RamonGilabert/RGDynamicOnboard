@@ -22,6 +22,7 @@
     self.deviceHeight = [UIScreen mainScreen].bounds.size.height;
 
     self.mainSlideView = [[RGDynamicOnboard alloc] initFullscreenWithNumberOfSlides:4 andPageControl:YES];
+    [self.view addSubview:self.mainSlideView];
 }
 
 #pragma mark - Change color status bar
