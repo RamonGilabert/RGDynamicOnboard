@@ -14,6 +14,7 @@
 		F62635721AB210E900E1EF4D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F62635711AB210E900E1EF4D /* Images.xcassets */; };
 		F62635751AB210E900E1EF4D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F62635731AB210E900E1EF4D /* LaunchScreen.xib */; };
 		F62635811AB210E900E1EF4D /* RGDynamicOnboardTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F62635801AB210E900E1EF4D /* RGDynamicOnboardTests.m */; };
+		F626358C1AB213C200E1EF4D /* RGDynamicOnboard.m in Sources */ = {isa = PBXBuildFile; fileRef = F626358B1AB213C200E1EF4D /* RGDynamicOnboard.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,8 @@
 		F626357A1AB210E900E1EF4D /* RGDynamicOnboardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RGDynamicOnboardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F626357F1AB210E900E1EF4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F62635801AB210E900E1EF4D /* RGDynamicOnboardTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RGDynamicOnboardTests.m; sourceTree = "<group>"; };
+		F626358A1AB213C200E1EF4D /* RGDynamicOnboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGDynamicOnboard.h; sourceTree = "<group>"; };
+		F626358B1AB213C200E1EF4D /* RGDynamicOnboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGDynamicOnboard.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +88,8 @@
 				F62635691AB210E900E1EF4D /* AppDelegate.m */,
 				F626356B1AB210E900E1EF4D /* ViewController.h */,
 				F626356C1AB210E900E1EF4D /* ViewController.m */,
+				F626358A1AB213C200E1EF4D /* RGDynamicOnboard.h */,
+				F626358B1AB213C200E1EF4D /* RGDynamicOnboard.m */,
 				F626356E1AB210E900E1EF4D /* Main.storyboard */,
 				F62635711AB210E900E1EF4D /* Images.xcassets */,
 				F62635731AB210E900E1EF4D /* LaunchScreen.xib */,
@@ -219,6 +224,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F626358C1AB213C200E1EF4D /* RGDynamicOnboard.m in Sources */,
 				F626356D1AB210E900E1EF4D /* ViewController.m in Sources */,
 				F626356A1AB210E900E1EF4D /* AppDelegate.m in Sources */,
 				F62635671AB210E900E1EF4D /* main.m in Sources */,
@@ -412,6 +418,7 @@
 				F62635861AB210E900E1EF4D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F62635871AB210E900E1EF4D /* Build configuration list for PBXNativeTarget "RGDynamicOnboardTests" */ = {
 			isa = XCConfigurationList;
@@ -420,6 +427,7 @@
 				F62635891AB210E900E1EF4D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
