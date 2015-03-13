@@ -81,7 +81,7 @@
 
 - (void)applyAnimationNumber:(int)animation toGoFromPage:(int)page
 {
-    [self.arrayWithSlides replaceObjectAtIndex:page withObject:[NSNumber numberWithInt:animation]];
+    [self.arrayOfAnimations replaceObjectAtIndex:page withObject:[NSNumber numberWithInt:animation]];
 }
 
 - (void)loadScrollViewWithPage:(NSUInteger)page
@@ -113,6 +113,10 @@
     CGFloat pageWidth = CGRectGetWidth(self.frame);
     NSUInteger page = floor((self.contentOffset.x - pageWidth) / pageWidth) + 1;
 
+    CGFloat realLocation = scrollView.contentOffset.x - self.deviceWidth * page;
+
+    if ((int)page < 0) return;
+
     UIView *view = [self.arrayWithSlides objectAtIndex:page];
 
     UIImageView *imageViewToAnimate = [UIImageView new];
@@ -123,6 +127,12 @@
             labelToAnimate = (UILabel *)viewWeTake;
         } else if ([viewWeTake isKindOfClass:[UIImageView class]]) {
             imageViewToAnimate = (UIImageView *)viewWeTake;
+        }
+    }
+
+    if (![self.arrayOfAnimations[page] isKindOfClass:[NSNull class]]) {
+        if ([self.arrayOfAnimations[page] intValue] == 0) {
+            imageViewToAnimate.frame = CGRectMake((self.deviceWidth - (self.deviceWidth/3))/2 + scrollView.contentOffset.x, self.deviceHeight/2 - self.deviceHeight/3 + 40 - realLocation, imageViewToAnimate.frame.size.width, imageViewToAnimate.frame.size.height);
         }
     }
 }
