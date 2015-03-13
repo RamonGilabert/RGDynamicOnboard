@@ -11,9 +11,10 @@ A nicely dynamic slideshow to present whatever you want, just add an image, some
 
 ## Upcoming features
 
-- TextField support, you're going to be able to listen to some methods once you are typing.
-- Adding custom fonts into the alert view.
-- More customization (ideas?).
+- Add more animations to the table.
+- Add a static image and things keep changing.
+- Add the option bring one view to the second layer.
+- Add more options of customization, a title, more images, background color.
 
 ## Contributing
 
