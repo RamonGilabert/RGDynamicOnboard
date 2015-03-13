@@ -71,8 +71,27 @@
     labelWithText.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:22];
     [labelWithText sizeToFit];
     labelWithText.frame = CGRectMake((self.deviceWidth - labelWithText.frame.size.width)/2, self.deviceHeight/2 + 75, labelWithText.frame.size.width, labelWithText.frame.size.height);
-
     [view addSubview:labelWithText];
+
+    [self.arrayWithSlides replaceObjectAtIndex:page withObject:view];
+}
+
+- (void)applyAnimationNumber:(int)animation toGoFromPage:(int)page
+{
+    UIView *view = [self.arrayWithSlides objectAtIndex:page];
+
+    UIImageView *imageViewToAnimate = [UIImageView new];
+    UILabel *labelToAnimate = [UILabel new];
+
+    if (animation == 0 && view) {
+        for (UIView *viewWeTake in view.subviews) {
+            if ([viewWeTake isKindOfClass:[UILabel class]]) {
+                labelToAnimate = (UILabel *)viewWeTake;
+            } else if ([viewWeTake isKindOfClass:[UIImageView class]]) {
+                imageViewToAnimate = (UIImageView *)viewWeTake;
+            }
+        }
+    }
 }
 
 - (void)loadScrollViewWithPage:(NSUInteger)page
@@ -98,6 +117,13 @@
 }
 
 #pragma mark - Delegate methods
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGFloat pageWidth = CGRectGetWidth(self.frame);
+    NSUInteger page = floor((self.contentOffset.x - pageWidth) / pageWidth) + 1;
+    NSLog(@"%d", (int)page);
+}
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
