@@ -40,8 +40,9 @@
     self.delegate = self;
 
     if (pageControl) {
-        self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, self.deviceHeight - 100, self.deviceWidth, 20)];
+        self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, self.deviceHeight - 75, self.deviceWidth, 20)];
         self.pageControl.numberOfPages = 4;
+        [self getPageControlColorFromBackgroundColor:[UIColor darkGrayColor]];
         [view addSubview: self];
         [view addSubview:self.pageControl];
     }
@@ -50,6 +51,28 @@
     [self loadScrollViewWithPage:1];
 
     return self;
+}
+
+- (void)addImage:(UIImage *)image andText:(NSString *)string toPageNumber:(int)page
+{
+    [self loadScrollViewWithPage:page];
+
+    UIView *view = [self.arrayWithSlides objectAtIndex:page];
+
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake((self.deviceWidth - (self.deviceWidth/3))/2, self.deviceHeight/2 - self.deviceHeight/3 + 40, self.deviceWidth/3, self.deviceHeight/4)];
+    imageView.image = image;
+    imageView.contentMode = UIViewContentModeScaleAspectFill;
+    [view addSubview:imageView];
+
+    UILabel *labelWithText = [[UILabel alloc] initWithFrame:CGRectMake((self.deviceWidth - (self.deviceWidth - 150))/2, self.deviceHeight/2 + 100, self.deviceWidth - 80, 200)];
+    labelWithText.textAlignment = NSTextAlignmentCenter;
+    labelWithText.numberOfLines = 10;
+    labelWithText.text = string;
+    labelWithText.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:22];
+    [labelWithText sizeToFit];
+    labelWithText.frame = CGRectMake((self.deviceWidth - labelWithText.frame.size.width)/2, self.deviceHeight/2 + 75, labelWithText.frame.size.width, labelWithText.frame.size.height);
+
+    [view addSubview:labelWithText];
 }
 
 - (void)loadScrollViewWithPage:(NSUInteger)page
@@ -65,12 +88,6 @@
 
     if (view.superview == nil)
     {
-        if (page == 0) {
-            view.backgroundColor = [UIColor redColor];
-        } else if (page == 1) {
-            view.backgroundColor = [UIColor blueColor];
-        }
-
         CGRect frame = self.frame;
         frame.origin.x = CGRectGetWidth(frame) * page;
         frame.origin.y = 0;
@@ -84,12 +101,10 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    // switch the indicator when more than 50% of the previous/next page is visible
     CGFloat pageWidth = CGRectGetWidth(self.frame);
     NSUInteger page = floor((self.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
     self.pageControl.currentPage = page;
 
-    // load the visible page and the page on either side of it (to avoid flashes when the user starts scrolling)
     [self loadScrollViewWithPage:page - 1];
     [self loadScrollViewWithPage:page];
     [self loadScrollViewWithPage:page + 1];
@@ -104,8 +119,8 @@
     CGFloat brightness = 0;
     CGFloat alpha = 0;
     [backgroundColor getHue:&hue saturation:&saturation brightness:&brightness alpha:&alpha];
-    self.pageControl.currentPageIndicatorTintColor = [UIColor colorWithHue:hue saturation:saturation brightness:brightness-0.5 alpha:alpha];
-    self.pageControl.pageIndicatorTintColor = [UIColor colorWithHue:hue saturation:saturation brightness:brightness-0.3 alpha:alpha];
+    self.pageControl.currentPageIndicatorTintColor = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:alpha-0.3];
+    self.pageControl.pageIndicatorTintColor = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:alpha-0.5];
 }
 
 @end
