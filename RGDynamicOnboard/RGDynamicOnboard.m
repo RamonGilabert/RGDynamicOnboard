@@ -9,6 +9,7 @@
 @property (strong, nonatomic) UIColor *colorSlide;
 @property int numberOfPages;
 @property NSMutableArray *arrayWithSlides;
+@property NSMutableArray *arrayOfAnimations;
 
 @end
 
@@ -22,9 +23,11 @@
     self.deviceHeight = [UIScreen mainScreen].bounds.size.height;
 
     self.arrayWithSlides = [NSMutableArray new];
+    self.arrayOfAnimations = [NSMutableArray new];
 
     for (int i = 0; i < slides; i++) {
         [self.arrayWithSlides addObject:[NSNull null]];
+        [self.arrayOfAnimations addObject:[NSNull null]];
     }
 
     self.mainView = [[[UIApplication sharedApplication] delegate] window];
@@ -78,20 +81,7 @@
 
 - (void)applyAnimationNumber:(int)animation toGoFromPage:(int)page
 {
-    UIView *view = [self.arrayWithSlides objectAtIndex:page];
-
-    UIImageView *imageViewToAnimate = [UIImageView new];
-    UILabel *labelToAnimate = [UILabel new];
-
-    if (animation == 0 && view) {
-        for (UIView *viewWeTake in view.subviews) {
-            if ([viewWeTake isKindOfClass:[UILabel class]]) {
-                labelToAnimate = (UILabel *)viewWeTake;
-            } else if ([viewWeTake isKindOfClass:[UIImageView class]]) {
-                imageViewToAnimate = (UIImageView *)viewWeTake;
-            }
-        }
-    }
+    [self.arrayWithSlides replaceObjectAtIndex:page withObject:[NSNumber numberWithInt:animation]];
 }
 
 - (void)loadScrollViewWithPage:(NSUInteger)page
@@ -122,7 +112,19 @@
 {
     CGFloat pageWidth = CGRectGetWidth(self.frame);
     NSUInteger page = floor((self.contentOffset.x - pageWidth) / pageWidth) + 1;
-    NSLog(@"%d", (int)page);
+
+    UIView *view = [self.arrayWithSlides objectAtIndex:page];
+
+    UIImageView *imageViewToAnimate = [UIImageView new];
+    UILabel *labelToAnimate = [UILabel new];
+
+    for (UIView *viewWeTake in view.subviews) {
+        if ([viewWeTake isKindOfClass:[UILabel class]]) {
+            labelToAnimate = (UILabel *)viewWeTake;
+        } else if ([viewWeTake isKindOfClass:[UIImageView class]]) {
+            imageViewToAnimate = (UIImageView *)viewWeTake;
+        }
+    }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
