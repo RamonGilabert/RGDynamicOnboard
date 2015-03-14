@@ -11,6 +11,7 @@
 @property NSMutableArray *arrayWithSlides;
 @property NSMutableArray *arrayOfAnimations;
 @property CGFloat scrollOffset;
+@property (strong, nonatomic) UIButton *buttonDismiss;
 
 @end
 
@@ -77,7 +78,30 @@
     labelWithText.frame = CGRectMake((self.deviceWidth - labelWithText.frame.size.width)/2, self.deviceHeight/2 + 75, labelWithText.frame.size.width, labelWithText.frame.size.height);
     [view addSubview:labelWithText];
 
+    if ((int)(page + 1) == (int)self.arrayWithSlides.count) {
+        self.buttonDismiss = [[UIButton alloc] initWithFrame:CGRectMake(50, self.deviceHeight - self.deviceHeight/5.5, self.deviceWidth - 100, 65)];
+        self.buttonDismiss.layer.cornerRadius = 7.5;
+        self.buttonDismiss.layer.borderColor = [UIColor darkGrayColor].CGColor;
+        self.buttonDismiss.layer.borderWidth = 2;
+        self.buttonDismiss.titleLabel.font = [UIFont fontWithName:@"Avenir" size:26];
+        [self.buttonDismiss setTitle:@"Start this journey" forState:UIControlStateNormal];
+        [self.buttonDismiss setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+        [self.buttonDismiss addTarget:self action:@selector(onDismissButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+        self.buttonDismiss.alpha = 0;
+        [view addSubview:self.buttonDismiss];
+    }
+
     [self.arrayWithSlides replaceObjectAtIndex:page withObject:view];
+}
+
+- (void)onDismissButtonPressed
+{
+    [UIView animateWithDuration:0.5 animations:^{
+        self.transform = CGAffineTransformMakeScale(3, 3);
+        self.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self removeFromSuperview];
+    }];
 }
 
 - (void)applyAnimationNumber:(int)animation toGoFromPage:(int)page
@@ -157,6 +181,11 @@
                 imageViewToAnimateFollowingPage.frame = CGRectMake(imageViewToAnimateFollowingPage.frame.origin.x, - self.frame.size.width + self.scrollOffset * 1.5, imageViewToAnimateFollowingPage.frame.size.width, imageViewToAnimateFollowingPage.frame.size.height);
             }
         }
+    }
+
+    if ((int)(page + 2) == (int)self.arrayWithSlides.count) {
+        self.pageControl.alpha = (self.frame.size.width - self.scrollOffset)/self.frame.size.width;
+        self.buttonDismiss.alpha = self.scrollOffset/self.frame.size.width;
     }
 }
 
