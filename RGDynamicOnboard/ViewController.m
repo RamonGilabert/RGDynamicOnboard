@@ -24,9 +24,9 @@
     self.mainSlideView = [[RGDynamicOnboard alloc] initFullscreenWithNumberOfSlides:3 andPageControl:YES inView:self.view];
     [self.mainSlideView addImage:[UIImage imageNamed:@"firstImage"] andText:@"Just like magic, add two lines of code and that's it..." toPageNumber:0];
     [self.mainSlideView applyAnimationNumber:0 toGoFromPage:0];
-    [self.mainSlideView addImage:[UIImage imageNamed:@"secondImage"] andText:@"With multiple animations and multiple options of customization!" toPageNumber:1];
+    [self.mainSlideView addImage:[UIImage imageNamed:@"secondImage"] andText:@"With multiple animations and some more options!" toPageNumber:1];
     [self.mainSlideView applyAnimationNumber:0 toGoFromPage:1];
-    [self.mainSlideView addImage:[UIImage imageNamed:@"firstImage"] andText:@"With multiple animations and multiple options of customization!" toPageNumber:2];
+    [self.mainSlideView addImage:[UIImage imageNamed:@"thirdImage"] andText:@"And some more customization is coming!" toPageNumber:2];
     [self.mainSlideView applyAnimationNumber:0 toGoFromPage:2];
 }
 
