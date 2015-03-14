@@ -10,6 +10,7 @@
 @property int numberOfPages;
 @property NSMutableArray *arrayWithSlides;
 @property NSMutableArray *arrayOfAnimations;
+@property CGFloat scrollOffset;
 
 @end
 
@@ -44,7 +45,7 @@
 
     if (pageControl) {
         self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, self.deviceHeight - 75, self.deviceWidth, 20)];
-        self.pageControl.numberOfPages = 4;
+        self.pageControl.numberOfPages = slides;
         [self getPageControlColorFromBackgroundColor:[UIColor darkGrayColor]];
         [view addSubview: self];
         [view addSubview:self.pageControl];
@@ -115,12 +116,21 @@
 
     CGFloat realLocation = scrollView.contentOffset.x - self.deviceWidth * page;
 
+    self.scrollOffset = realLocation;
+
     if ((int)page < 0) return;
 
     UIView *view = [self.arrayWithSlides objectAtIndex:page];
+    UIView *viewSecond = [UIView new];
+
+    if (page + 1 < self.arrayWithSlides.count) {
+        viewSecond = [self.arrayWithSlides objectAtIndex:(page + 1)];
+    }
 
     UIImageView *imageViewToAnimate = [UIImageView new];
     UILabel *labelToAnimate = [UILabel new];
+    UIImageView *imageViewToAnimateFollowingPage = [UIImageView new];
+    UILabel *labelToAnimateFollowingPage = [UILabel new];
 
     for (UIView *viewWeTake in view.subviews) {
         if ([viewWeTake isKindOfClass:[UILabel class]]) {
@@ -130,15 +140,30 @@
         }
     }
 
+    for (UIView *viewWeTake in viewSecond.subviews) {
+        if ([viewWeTake isKindOfClass:[UILabel class]]) {
+            labelToAnimateFollowingPage = (UILabel *)viewWeTake;
+        } else if ([viewWeTake isKindOfClass:[UIImageView class]]) {
+            imageViewToAnimateFollowingPage = (UIImageView *)viewWeTake;
+        }
+    }
+
     if (![self.arrayOfAnimations[page] isKindOfClass:[NSNull class]]) {
         if ([self.arrayOfAnimations[page] intValue] == 0) {
-            imageViewToAnimate.frame = CGRectMake((self.deviceWidth - (self.deviceWidth/3))/2 + scrollView.contentOffset.x, self.deviceHeight/2 - self.deviceHeight/3 + 40 - realLocation, imageViewToAnimate.frame.size.width, imageViewToAnimate.frame.size.height);
+            imageViewToAnimate.frame = CGRectMake((self.deviceWidth - (self.deviceWidth/3))/2 + self.scrollOffset/1.5, self.deviceHeight/2 - self.deviceHeight/3 + 40 - realLocation, imageViewToAnimate.frame.size.width, imageViewToAnimate.frame.size.height);
+            if (self.scrollOffset + 20 > self.frame.size.width) {
+                imageViewToAnimateFollowingPage.frame = CGRectMake(imageViewToAnimateFollowingPage.frame.origin.x, self.deviceHeight/2 - self.deviceHeight/3 + 40, imageViewToAnimateFollowingPage.frame.size.height, imageViewToAnimateFollowingPage.frame.size.height);
+            } else {
+                imageViewToAnimateFollowingPage.frame = CGRectMake(imageViewToAnimateFollowingPage.frame.origin.x, - self.frame.size.width + self.scrollOffset * 1.5, imageViewToAnimateFollowingPage.frame.size.height, imageViewToAnimateFollowingPage.frame.size.height);
+            }
         }
     }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
+    self.scrollOffset = 0;
+
     CGFloat pageWidth = CGRectGetWidth(self.frame);
     NSUInteger page = floor((self.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
     self.pageControl.currentPage = page;
