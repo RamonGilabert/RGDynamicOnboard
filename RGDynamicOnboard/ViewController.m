@@ -24,6 +24,8 @@
     self.mainSlideView = [[RGDynamicOnboard alloc] initFullscreenWithNumberOfSlides:4 andPageControl:YES inView:self.view];
     [self.mainSlideView addImage:[UIImage imageNamed:@"firstImage"] andText:@"Just like magic, add two lines of code and that's it..." toPageNumber:0];
     [self.mainSlideView applyAnimationNumber:0 toGoFromPage:0];
+    [self.mainSlideView addImage:[UIImage imageNamed:@"secondImage"] andText:@"With multiple animations and multiple options of customization!" toPageNumber:1];
+    [self.mainSlideView applyAnimationNumber:1 toGoFromPage:1];
 }
 
 #pragma mark - Change color status bar
