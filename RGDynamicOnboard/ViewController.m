@@ -35,7 +35,8 @@
 
     self.mainSlideView = [[RGDynamicOnboard alloc] initFullscreenWithNumberOfSlides:3 andPageControl:YES inView:self.view];
     [self.mainSlideView addStaticImage:[UIImage imageNamed:@"firstImage"] inPosition:3];
-
+    [self.mainSlideView addText:@"Just like magic too, add static images!" inPage:0];
+    [self.mainSlideView addText:@"Add then text to pages" inPage:1];
 }
 
 #pragma mark - Change color status bar

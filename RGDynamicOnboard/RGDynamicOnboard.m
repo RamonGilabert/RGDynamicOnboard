@@ -13,6 +13,7 @@
 @property NSMutableArray *arrayOfAnimations;
 @property CGFloat scrollOffset;
 @property (strong, nonatomic) UIButton *buttonDismiss;
+@property (strong, nonatomic) UIImageView *staticImageView;
 
 @end
 
@@ -63,33 +64,46 @@
 
 - (void)addStaticImage:(UIImage *)image inPosition:(int)position
 {
-    UIImageView *imageView = [UIImageView new];
+    self.staticImageView = [UIImageView new];
 
     if (position == 0) {
-        imageView.frame = CGRectMake((self.deviceWidth - self.deviceWidth/1.7)/2, (self.deviceHeight - self.deviceHeight/3)/2 - 25, self.deviceWidth/1.7, self.deviceHeight/3);
+        self.staticImageView.frame = CGRectMake((self.deviceWidth - self.deviceWidth/1.7)/2, (self.deviceHeight - self.deviceHeight/3)/2 - 25, self.deviceWidth/1.7, self.deviceHeight/3);
     } else if (position == 1) {
-        imageView.frame = CGRectMake((self.deviceWidth - self.deviceWidth/1.7)/2 + 60, (self.deviceHeight - self.deviceHeight/3)/2 - 100, self.deviceWidth/1.7, self.deviceHeight/3);
+        self.staticImageView.frame = CGRectMake((self.deviceWidth - self.deviceWidth/1.7)/2 + 60, (self.deviceHeight - self.deviceHeight/3)/2 - 100, self.deviceWidth/1.7, self.deviceHeight/3);
     } else if (position == 2) {
-        imageView.frame = CGRectMake((self.deviceWidth - self.deviceWidth/1.7)/2 - 60, (self.deviceHeight - self.deviceHeight/3)/2 - 100, self.deviceWidth/1.7, self.deviceHeight/3);
+        self.staticImageView.frame = CGRectMake((self.deviceWidth - self.deviceWidth/1.7)/2 - 60, (self.deviceHeight - self.deviceHeight/3)/2 - 100, self.deviceWidth/1.7, self.deviceHeight/3);
     } else {
-        imageView.frame = CGRectMake((self.deviceWidth - self.deviceWidth/1.7)/2, (self.deviceHeight - self.deviceHeight/3)/2 - 100, self.deviceWidth/1.7, self.deviceHeight/3);
+        self.staticImageView.frame = CGRectMake((self.deviceWidth - self.deviceWidth/1.7)/2, (self.deviceHeight - self.deviceHeight/3)/2 - 100, self.deviceWidth/1.7, self.deviceHeight/3);
     }
 
-    imageView.contentMode = UIViewContentModeScaleAspectFill;
-    imageView.image = image;
+    self.staticImageView.contentMode = UIViewContentModeScaleAspectFill;
+    self.staticImageView.image = image;
 
-    [self.viewMain addSubview:imageView];
+    [self.viewMain addSubview:self.staticImageView];
 }
 
 - (void)addStaticImage:(UIImage *)image inFrame:(CGRect)frame
 {
     if (&frame && image) {
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:frame];
-        imageView.contentMode = UIViewContentModeScaleAspectFill;
-        imageView.image = image;
-
-        [self.viewMain addSubview:imageView];
+        self.staticImageView = [[UIImageView alloc] initWithFrame:frame];
+        self.staticImageView.contentMode = UIViewContentModeScaleAspectFill;
+        self.staticImageView.image = image;
+        [self.viewMain addSubview:self.staticImageView];
     }
+}
+
+- (void)addText:(NSString *)string inPage:(int)page
+{
+    UIView *view = [self.arrayWithSlides objectAtIndex:page];
+    UILabel *labelOfText = [[UILabel alloc] initWithFrame:CGRectMake(25, self.deviceHeight - self.deviceHeight/6, self.deviceWidth - 50, 200)];
+    labelOfText.numberOfLines = 10;
+    labelOfText.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:22];
+    labelOfText.textAlignment = NSTextAlignmentCenter;
+    labelOfText.text = string;
+    [labelOfText sizeToFit];
+    CGRect rectOfLabel = labelOfText.frame;
+    labelOfText.frame = CGRectMake((self.deviceWidth - rectOfLabel.size.width)/2, self.deviceHeight - rectOfLabel.size.height - self.deviceHeight/4, rectOfLabel.size.width, rectOfLabel.size.height);
+    [view addSubview:labelOfText];
 }
 
 - (void)addImage:(UIImage *)image andText:(NSString *)string toPageNumber:(int)page
@@ -112,28 +126,22 @@
     labelWithText.frame = CGRectMake((self.deviceWidth - labelWithText.frame.size.width)/2, self.deviceHeight/2 + 75, labelWithText.frame.size.width, labelWithText.frame.size.height);
     [view addSubview:labelWithText];
 
-    if ((int)(page + 1) == (int)self.arrayWithSlides.count) {
-        self.buttonDismiss = [[UIButton alloc] initWithFrame:CGRectMake(50, self.deviceHeight - self.deviceHeight/5.5, self.deviceWidth - 100, 65)];
-        self.buttonDismiss.layer.cornerRadius = 7.5;
-        self.buttonDismiss.layer.borderColor = [UIColor darkGrayColor].CGColor;
-        self.buttonDismiss.layer.borderWidth = 2;
-        self.buttonDismiss.titleLabel.font = [UIFont fontWithName:@"Avenir" size:26];
-        [self.buttonDismiss setTitle:@"Start this journey" forState:UIControlStateNormal];
-        [self.buttonDismiss setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-        [self.buttonDismiss addTarget:self action:@selector(onDismissButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-        self.buttonDismiss.alpha = 0;
-        [view addSubview:self.buttonDismiss];
-    }
-
     [self.arrayWithSlides replaceObjectAtIndex:page withObject:view];
 }
 
 - (void)onDismissButtonPressed
 {
     [UIView animateWithDuration:0.5 animations:^{
+        if (self.staticImageView) {
+            self.staticImageView.transform = CGAffineTransformMakeScale(3, 3);
+            self.staticImageView.alpha = 0;
+        }
         self.transform = CGAffineTransformMakeScale(3, 3);
         self.alpha = 0;
     } completion:^(BOOL finished) {
+        if (self.staticImageView) {
+            [self.staticImageView removeFromSuperview];
+        }
         [self removeFromSuperview];
     }];
 }
@@ -162,6 +170,19 @@
         view.frame = frame;
 
         [self addSubview:view];
+    }
+
+    if ((int)(page + 1) == self.arrayWithSlides.count) {
+        self.buttonDismiss = [[UIButton alloc] initWithFrame:CGRectMake(50, self.deviceHeight - self.deviceHeight/5.5, self.deviceWidth - 100, 65)];
+        self.buttonDismiss.layer.cornerRadius = 7.5;
+        self.buttonDismiss.layer.borderColor = [UIColor darkGrayColor].CGColor;
+        self.buttonDismiss.layer.borderWidth = 2;
+        self.buttonDismiss.titleLabel.font = [UIFont fontWithName:@"Avenir" size:26];
+        [self.buttonDismiss setTitle:@"Start this journey" forState:UIControlStateNormal];
+        [self.buttonDismiss setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+        [self.buttonDismiss addTarget:self action:@selector(onDismissButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+        self.buttonDismiss.alpha = 0;
+        [view addSubview:self.buttonDismiss];
     }
 }
 
