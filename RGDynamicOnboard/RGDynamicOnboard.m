@@ -58,6 +58,8 @@
 
     [self loadScrollViewWithPage:0];
     [self loadScrollViewWithPage:1];
+    [self loadScrollViewWithPage:2];
+    [self loadScrollViewWithPage:3];
 
     return self;
 }
@@ -172,7 +174,7 @@
         [self addSubview:view];
     }
 
-    if ((int)(page + 1) == self.arrayWithSlides.count) {
+    if ((int)(page + 1) == (int)self.arrayWithSlides.count) {
         self.buttonDismiss = [[UIButton alloc] initWithFrame:CGRectMake(50, self.deviceHeight - self.deviceHeight/5.5, self.deviceWidth - 100, 65)];
         self.buttonDismiss.layer.cornerRadius = 7.5;
         self.buttonDismiss.layer.borderColor = [UIColor darkGrayColor].CGColor;
@@ -259,6 +261,8 @@
     [self loadScrollViewWithPage:page - 1];
     [self loadScrollViewWithPage:page];
     [self loadScrollViewWithPage:page + 1];
+    [self loadScrollViewWithPage:page + 2];
+    [self loadScrollViewWithPage:page + 3];
 }
 
 #pragma mark - Helper methods
