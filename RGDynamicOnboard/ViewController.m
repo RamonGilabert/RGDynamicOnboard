@@ -34,7 +34,7 @@
 #pragma mark - Second example
 
     self.mainSlideView = [[RGDynamicOnboard alloc] initFullscreenWithNumberOfSlides:3 andPageControl:YES inView:self.view];
-    self.mainSlideView;
+    [self.mainSlideView addStaticImage:[UIImage imageNamed:@"firstImage"] inPosition:3];
 
 }
 

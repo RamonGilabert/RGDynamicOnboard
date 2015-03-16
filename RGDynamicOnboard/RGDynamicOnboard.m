@@ -66,15 +66,16 @@
     UIImageView *imageView = [UIImageView new];
 
     if (position == 0) {
-        imageView.frame = CGRectMake(0, 0, 0, 0);
+        imageView.frame = CGRectMake((self.deviceWidth - self.deviceWidth/1.7)/2, (self.deviceHeight - self.deviceHeight/3)/2, self.deviceWidth/1.7, self.deviceHeight/3);
     } else if (position == 1) {
-        imageView.frame = CGRectMake(0, 0, 0, 0);
+        imageView.frame = CGRectMake((self.deviceWidth - self.deviceWidth/1.7)/2 + 60, (self.deviceHeight - self.deviceHeight/3)/2 - 75, self.deviceWidth/1.7, self.deviceHeight/3);
     } else if (position == 2) {
-        imageView.frame = CGRectMake(0, 0, 0, 0);
+        imageView.frame = CGRectMake((self.deviceWidth - self.deviceWidth/1.7)/2 - 60, (self.deviceHeight - self.deviceHeight/3)/2 - 75, self.deviceWidth/1.7, self.deviceHeight/3);
     } else {
-        imageView.frame = CGRectMake(0, 0, 0, 0);
+        imageView.frame = CGRectMake((self.deviceWidth - self.deviceWidth/1.7)/2, (self.deviceHeight - self.deviceHeight/3)/2 - 50, self.deviceWidth/1.7, self.deviceHeight/3);
     }
 
+    imageView.contentMode = UIViewContentModeScaleAspectFill;
     imageView.image = image;
 
     [self.viewMain addSubview:imageView];
@@ -178,19 +179,23 @@
     UIImageView *imageViewToAnimateFollowingPage = [UIImageView new];
     UILabel *labelToAnimateFollowingPage = [UILabel new];
 
-    for (UIView *viewWeTake in view.subviews) {
-        if ([viewWeTake isKindOfClass:[UILabel class]]) {
-            labelToAnimate = (UILabel *)viewWeTake;
-        } else if ([viewWeTake isKindOfClass:[UIImageView class]]) {
-            imageViewToAnimate = (UIImageView *)viewWeTake;
+    if (view.subviews.count > 0) {
+        for (UIView *viewWeTake in view.subviews) {
+            if ([viewWeTake isKindOfClass:[UILabel class]]) {
+                labelToAnimate = (UILabel *)viewWeTake;
+            } else if ([viewWeTake isKindOfClass:[UIImageView class]]) {
+                imageViewToAnimate = (UIImageView *)viewWeTake;
+            }
         }
     }
 
-    for (UIView *viewWeTake in viewSecond.subviews) {
-        if ([viewWeTake isKindOfClass:[UILabel class]]) {
-            labelToAnimateFollowingPage = (UILabel *)viewWeTake;
-        } else if ([viewWeTake isKindOfClass:[UIImageView class]]) {
-            imageViewToAnimateFollowingPage = (UIImageView *)viewWeTake;
+    if (![viewSecond isKindOfClass:[NSNull class]]) {
+        for (UIView *viewWeTake in viewSecond.subviews) {
+            if ([viewWeTake isKindOfClass:[UILabel class]]) {
+                labelToAnimateFollowingPage = (UILabel *)viewWeTake;
+            } else if ([viewWeTake isKindOfClass:[UIImageView class]]) {
+                imageViewToAnimateFollowingPage = (UIImageView *)viewWeTake;
+            }
         }
     }
 
