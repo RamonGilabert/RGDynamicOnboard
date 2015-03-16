@@ -66,19 +66,30 @@
     UIImageView *imageView = [UIImageView new];
 
     if (position == 0) {
-        imageView.frame = CGRectMake((self.deviceWidth - self.deviceWidth/1.7)/2, (self.deviceHeight - self.deviceHeight/3)/2, self.deviceWidth/1.7, self.deviceHeight/3);
+        imageView.frame = CGRectMake((self.deviceWidth - self.deviceWidth/1.7)/2, (self.deviceHeight - self.deviceHeight/3)/2 - 25, self.deviceWidth/1.7, self.deviceHeight/3);
     } else if (position == 1) {
-        imageView.frame = CGRectMake((self.deviceWidth - self.deviceWidth/1.7)/2 + 60, (self.deviceHeight - self.deviceHeight/3)/2 - 75, self.deviceWidth/1.7, self.deviceHeight/3);
+        imageView.frame = CGRectMake((self.deviceWidth - self.deviceWidth/1.7)/2 + 60, (self.deviceHeight - self.deviceHeight/3)/2 - 100, self.deviceWidth/1.7, self.deviceHeight/3);
     } else if (position == 2) {
-        imageView.frame = CGRectMake((self.deviceWidth - self.deviceWidth/1.7)/2 - 60, (self.deviceHeight - self.deviceHeight/3)/2 - 75, self.deviceWidth/1.7, self.deviceHeight/3);
+        imageView.frame = CGRectMake((self.deviceWidth - self.deviceWidth/1.7)/2 - 60, (self.deviceHeight - self.deviceHeight/3)/2 - 100, self.deviceWidth/1.7, self.deviceHeight/3);
     } else {
-        imageView.frame = CGRectMake((self.deviceWidth - self.deviceWidth/1.7)/2, (self.deviceHeight - self.deviceHeight/3)/2 - 50, self.deviceWidth/1.7, self.deviceHeight/3);
+        imageView.frame = CGRectMake((self.deviceWidth - self.deviceWidth/1.7)/2, (self.deviceHeight - self.deviceHeight/3)/2 - 100, self.deviceWidth/1.7, self.deviceHeight/3);
     }
 
     imageView.contentMode = UIViewContentModeScaleAspectFill;
     imageView.image = image;
 
     [self.viewMain addSubview:imageView];
+}
+
+- (void)addStaticImage:(UIImage *)image inFrame:(CGRect)frame
+{
+    if (&frame && image) {
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:frame];
+        imageView.contentMode = UIViewContentModeScaleAspectFill;
+        imageView.image = image;
+
+        [self.viewMain addSubview:imageView];
+    }
 }
 
 - (void)addImage:(UIImage *)image andText:(NSString *)string toPageNumber:(int)page
