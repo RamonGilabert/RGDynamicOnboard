@@ -7,6 +7,7 @@
 @property (strong, nonatomic) UIPageControl *pageControl;
 @property (strong, nonatomic) UIWindow *mainView;
 @property (strong, nonatomic) UIColor *colorSlide;
+@property (strong, nonatomic) UIView *viewMain;
 @property int numberOfPages;
 @property NSMutableArray *arrayWithSlides;
 @property NSMutableArray *arrayOfAnimations;
@@ -20,6 +21,8 @@
 - (instancetype)initFullscreenWithNumberOfSlides:(int)slides andPageControl:(BOOL)pageControl inView:(UIView *)view
 {
     self = [RGDynamicOnboard new];
+
+    self.viewMain = view;
     
     self.deviceWidth = [UIScreen mainScreen].bounds.size.width;
     self.deviceHeight = [UIScreen mainScreen].bounds.size.height;
@@ -56,6 +59,25 @@
     [self loadScrollViewWithPage:1];
 
     return self;
+}
+
+- (void)addStaticImage:(UIImage *)image inPosition:(int)position
+{
+    UIImageView *imageView = [UIImageView new];
+
+    if (position == 0) {
+        imageView.frame = CGRectMake(0, 0, 0, 0);
+    } else if (position == 1) {
+        imageView.frame = CGRectMake(0, 0, 0, 0);
+    } else if (position == 2) {
+        imageView.frame = CGRectMake(0, 0, 0, 0);
+    } else {
+        imageView.frame = CGRectMake(0, 0, 0, 0);
+    }
+
+    imageView.image = image;
+
+    [self.viewMain addSubview:imageView];
 }
 
 - (void)addImage:(UIImage *)image andText:(NSString *)string toPageNumber:(int)page
