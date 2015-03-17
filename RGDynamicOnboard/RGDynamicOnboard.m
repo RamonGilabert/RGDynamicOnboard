@@ -435,6 +435,20 @@
         }];
     }
 
+    if ((int)page < self.pageToPerformFirstAnimation) {
+        self.imageViewThatMoves.transform = CGAffineTransformMakeScale(1, 1);
+        [UIView animateWithDuration:0.2 animations:^{
+            self.imageViewThatMoves.transform = CGAffineTransformMakeScale(1.1, 1.1);
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:1.4 animations:^{
+                self.imageViewThatMoves.transform = CGAffineTransformMakeScale(0, 0);
+                self.imageViewThatMoves.alpha = 0;
+            } completion:^(BOOL finished) {
+                [self.imageViewThatMoves removeFromSuperview];
+            }];
+        }];
+    }
+
     [self loadScrollViewWithPage:page - 1];
     [self loadScrollViewWithPage:page];
     [self loadScrollViewWithPage:page + 1];
