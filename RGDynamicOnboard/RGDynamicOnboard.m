@@ -72,17 +72,38 @@
         self.backgroundImageView.contentMode = UIViewContentModeScaleAspectFill;
         self.backgroundImageView.image = image;
         [self insertSubview:self.backgroundImageView atIndex:0];
+
+        self.pageControl.currentPageIndicatorTintColor = [UIColor whiteColor];
+        self.pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
+
+        self.buttonDismiss.layer.borderColor = [UIColor whiteColor].CGColor;
+        [self.buttonDismiss setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
 }
 
 - (void)addBackgroundImage:(UIImage *)image withFrame:(CGRect)frame
 {
+    if (image) {
+        self.backgroundImageView = [[UIImageView alloc] initWithFrame:frame];
+        self.backgroundImageView.contentMode = UIViewContentModeScaleAspectFill;
+        self.backgroundImageView.image = image;
+        [self insertSubview:self.backgroundImageView atIndex:0];
 
+        if (frame.origin.y > self.deviceHeight/2 || frame.size.height >= self.deviceHeight) {
+            self.pageControl.currentPageIndicatorTintColor = [UIColor whiteColor];
+            self.pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
+        }
+    }
 }
 
 - (void)addBackgroundImage:(UIImage *)image withX:(CGFloat)xValue withY:(CGFloat)yValue withAllWidthAndHeight:(CGFloat)height
 {
-
+    if (image) {
+        self.backgroundImageView = [[UIImageView alloc] initWithFrame:CGRectMake(xValue, yValue, self.frame.size.width*self.numberOfPages, height)];
+        self.backgroundImageView.contentMode = UIViewContentModeScaleAspectFill;
+        self.backgroundImageView.image = image;
+        [self insertSubview:self.backgroundImageView atIndex:0];
+    }
 }
 
 - (void)addStaticImage:(UIImage *)image inPosition:(int)position
@@ -196,16 +217,18 @@
     }
 
     if ((int)(page + 1) == (int)self.arrayWithSlides.count) {
-        self.buttonDismiss = [[UIButton alloc] initWithFrame:CGRectMake(50, self.deviceHeight - self.deviceHeight/5.5, self.deviceWidth - 100, 65)];
-        self.buttonDismiss.layer.cornerRadius = 7.5;
-        self.buttonDismiss.layer.borderColor = [UIColor darkGrayColor].CGColor;
-        self.buttonDismiss.layer.borderWidth = 2;
-        self.buttonDismiss.titleLabel.font = [UIFont fontWithName:@"Avenir" size:26];
-        [self.buttonDismiss setTitle:@"Start this journey" forState:UIControlStateNormal];
-        [self.buttonDismiss setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-        [self.buttonDismiss addTarget:self action:@selector(onDismissButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-        self.buttonDismiss.alpha = 0;
-        [view addSubview:self.buttonDismiss];
+        if (!self.buttonDismiss) {
+            self.buttonDismiss = [[UIButton alloc] initWithFrame:CGRectMake(50, self.deviceHeight - self.deviceHeight/5.5, self.deviceWidth - 100, 65)];
+            self.buttonDismiss.layer.cornerRadius = 7.5;
+            self.buttonDismiss.layer.borderColor = [UIColor darkGrayColor].CGColor;
+            self.buttonDismiss.layer.borderWidth = 2;
+            self.buttonDismiss.titleLabel.font = [UIFont fontWithName:@"Avenir" size:26];
+            [self.buttonDismiss setTitle:@"Start this journey" forState:UIControlStateNormal];
+            [self.buttonDismiss setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+            [self.buttonDismiss addTarget:self action:@selector(onDismissButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+            self.buttonDismiss.alpha = 0;
+            [view addSubview:self.buttonDismiss];
+        }
     }
 }
 
