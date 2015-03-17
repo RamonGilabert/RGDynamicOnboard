@@ -50,8 +50,13 @@
 
 #pragma mark - Fourth example
 
-    [self.mainSlideView addStaticImage:[UIImage imageNamed:@"firstImage"] inPosition:3 fromPage:0 toPage:1 withAnimationAppearance:1];
-    [self.mainSlideView addStaticImage:[UIImage imageNamed:@"secondImage"] inPosition:3 fromPage:1 toPage:3 withAnimationAppearance:0];
+//    [self.mainSlideView addStaticImage:[UIImage imageNamed:@"firstImage"] inPosition:3 fromPage:0 toPage:1 withAnimationAppearance:1];
+//    [self.mainSlideView addStaticImage:[UIImage imageNamed:@"secondImage"] inPosition:3 fromPage:1 toPage:3 withAnimationAppearance:0];
+
+#pragma mark - Fifth example
+
+    [self.mainSlideView addEditableStaticImage:[UIImage imageNamed:@"thirdImage"] inPage:1 inFrame:CGRectMake((self.deviceWidth - 200)/2, 200, 200, 200) andGoToFrame:CGRectMake((self.deviceWidth - 200)/2, 120, 100, 100) toPage:1];
+
 }
 
 #pragma mark - Change color status bar

@@ -22,6 +22,10 @@
 @property (weak, nonatomic) NSNumber *secondPageSecond;
 @property int animationStaticImage;
 @property int animationStaticImageSecond;
+@property (strong, nonatomic) UIImageView *imageViewThatMoves;
+@property int pageToPerformFirstAnimation;
+@property int pageToPerformSecondAnimation;
+@property CGRect frameToGo;
 
 @end
 
@@ -31,6 +35,7 @@
 {
     self = [RGDynamicOnboard new];
 
+    self.viewMain = [UIView new];
     self.viewMain = view;
     
     self.deviceWidth = [UIScreen mainScreen].bounds.size.width;
@@ -60,9 +65,10 @@
         self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, self.deviceHeight - 75, self.deviceWidth, 20)];
         self.pageControl.numberOfPages = slides;
         [self getPageControlColorFromBackgroundColor:[UIColor darkGrayColor]];
-        [view addSubview: self];
-        [view addSubview:self.pageControl];
+        [self.viewMain addSubview:self.pageControl];
     }
+
+    [self.viewMain addSubview: self];
 
     [self loadScrollViewWithPage:0];
     [self loadScrollViewWithPage:1];
@@ -70,6 +76,27 @@
     [self loadScrollViewWithPage:3];
 
     return self;
+}
+
+- (void)addEditableStaticImage:(UIImage *)image inPage:(int)page inFrame:(CGRect)initialFrame andGoToFrame:(CGRect)secondFrame toPage:(int)pageToGo
+{
+    if (image) {
+        self.imageViewThatMoves = [[UIImageView alloc] initWithFrame:initialFrame];
+        self.imageViewThatMoves.contentMode = UIViewContentModeScaleAspectFill;
+        self.imageViewThatMoves.image = image;
+        self.frameToGo = secondFrame;
+        self.pageToPerformFirstAnimation = page;
+        self.pageToPerformSecondAnimation = pageToGo;
+
+        if (page == 0) {
+            [self.viewMain addSubview:self.imageViewThatMoves];
+        }
+    }
+}
+
+- (void)image:(UIImage *)image toGoFromPage:(int)page toFrame:(CGRect)lastFrame toPage:(int)pageToGo
+{
+
 }
 
 - (void)addBackgroundImage:(UIImage *)image
@@ -392,6 +419,21 @@
     CGFloat pageWidth = CGRectGetWidth(self.frame);
     NSUInteger page = floor((self.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
     self.pageControl.currentPage = page;
+
+    if (self.pageToPerformFirstAnimation == (int)page && ![self.viewMain.subviews containsObject:self.imageViewThatMoves]) {
+        [self.viewMain addSubview:self.imageViewThatMoves];
+        self.imageViewThatMoves.alpha = 0;
+
+        self.imageViewThatMoves.transform = CGAffineTransformMakeScale(0, 0);
+        [UIView animateWithDuration:0.3 animations:^{
+            self.imageViewThatMoves.alpha = 1;
+            self.imageViewThatMoves.transform = CGAffineTransformMakeScale(1.2, 1.2);
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.2 animations:^{
+                self.imageViewThatMoves.transform = CGAffineTransformMakeScale(1, 1);
+            }];
+        }];
+    }
 
     [self loadScrollViewWithPage:page - 1];
     [self loadScrollViewWithPage:page];
