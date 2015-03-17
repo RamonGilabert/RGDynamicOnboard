@@ -27,6 +27,7 @@
 @property int pageToPerformSecondAnimation;
 @property CGRect frameToGo;
 @property CGFloat lastOffset;
+@property CGRect initialFrame;
 
 @end
 
@@ -88,6 +89,7 @@
         self.frameToGo = secondFrame;
         self.pageToPerformFirstAnimation = page;
         self.pageToPerformSecondAnimation = pageToGo;
+        self.initialFrame = initialFrame;
 
         if (page == 0) {
             [self.viewMain addSubview:self.imageViewThatMoves];
@@ -396,23 +398,13 @@
         }
     }
 
-    CGFloat velocityOfScroll = (realLocation - self.lastOffset);
+    CGFloat floatValue = (self.frameToGo.origin.y - self.initialFrame.origin.y)/self.frame.size.width;
+    CGFloat floatValueX = (self.frameToGo.origin.x - self.initialFrame.origin.x)/self.frame.size.width;
+    CGFloat floatValueHeight = (self.frameToGo.size.height - self.initialFrame.size.height)/self.frame.size.width;
+    CGFloat floatValueWidth = (self.frameToGo.size.width - self.initialFrame.size.width)/self.frame.size.width;
 
-    if (velocityOfScroll < 0) {
-        velocityOfScroll = velocityOfScroll * -1;
-    }
-
-    CGFloat floatValue = (self.frameToGo.origin.y - self.imageViewThatMoves.frame.origin.y)/self.frame.size.width;
-    CGFloat floatValueX = (self.frameToGo.origin.x - self.imageViewThatMoves.frame.origin.x)/self.frame.size.width;
-    CGFloat floatValueHeight = (self.frameToGo.size.height - self.imageViewThatMoves.frame.size.height)/self.frame.size.width;
-    CGFloat floatValueWidth = (self.frameToGo.size.width - self.imageViewThatMoves.frame.size.width)/self.frame.size.width;
-
-    self.imageViewThatMoves.frame = CGRectMake(self.imageViewThatMoves.frame.origin.x + (floatValueX*velocityOfScroll), self.imageViewThatMoves.frame.origin.y + (floatValue*velocityOfScroll), self.imageViewThatMoves.frame.size.width + (floatValueHeight*velocityOfScroll), self.imageViewThatMoves.frame.size.height + (floatValueWidth*velocityOfScroll));
-
-    if (velocityOfScroll > 100) {
-        self.lastOffset = realLocation + 30;
-    } else {
-        self.lastOffset = realLocation - 10;
+    if (self.pageToPerformFirstAnimation == (int)page) {
+        self.imageViewThatMoves.frame = CGRectMake(self.initialFrame.origin.x + self.scrollOffset*floatValueX, self.initialFrame.origin.y + self.scrollOffset*floatValue, self.initialFrame.size.width + self.scrollOffset*floatValueWidth, self.initialFrame.size.height + self.scrollOffset*floatValueHeight);
     }
 
     if (![self.arrayOfAnimations[page] isKindOfClass:[NSNull class]]) {
