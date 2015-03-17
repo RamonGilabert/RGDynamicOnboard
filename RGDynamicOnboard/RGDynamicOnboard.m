@@ -17,9 +17,11 @@
 @property (strong, nonatomic) UIImageView *staticImageViewSecond;
 @property (strong, nonatomic) UIImageView *backgroundImageView;
 @property (weak, nonatomic) NSNumber *firstPageFirst;
-@property (weak, nonatomic) NSNumber * firstPageSecond;
-@property (weak, nonatomic) NSNumber * secondPageFirst;
-@property (weak, nonatomic) NSNumber * secondPageSecond;
+@property (weak, nonatomic) NSNumber *firstPageSecond;
+@property (weak, nonatomic) NSNumber *secondPageFirst;
+@property (weak, nonatomic) NSNumber *secondPageSecond;
+@property int animationStaticImage;
+@property int animationStaticImageSecond;
 
 @end
 
@@ -141,9 +143,11 @@
     [self.viewMain addSubview:self.staticImageView];
 }
 
-- (void)addStaticImage:(UIImage *)image inPosition:(int)position fromPage:(int)firstPage toPage:(int)secondPage
+- (void)addStaticImage:(UIImage *)image inPosition:(int)position fromPage:(int)firstPage toPage:(int)secondPage withAnimationAppearance:(int)animationOption
 {
     if (!self.firstPageFirst) {
+        self.animationStaticImage = animationOption;
+
         self.firstPageFirst = [NSNumber numberWithInt:firstPage];
         self.firstPageSecond = [NSNumber numberWithInt:secondPage];
 
@@ -163,6 +167,8 @@
         self.staticImageView.image = image;
 
     } else {
+        self.animationStaticImageSecond = animationOption;
+
         self.secondPageFirst = [NSNumber numberWithInt:firstPage];
         self.secondPageSecond = [NSNumber numberWithInt:secondPage];
 
@@ -386,10 +392,50 @@
 
     if ([self.firstPageSecond intValue] == (int)page) {
         [self.staticImageView removeFromSuperview];
+    } else if ([self.firstPageFirst intValue] == (int)page) {
+        [self.mainView addSubview:self.staticImageView];
+        self.staticImageView.alpha = 0;
+
+        if (self.animationStaticImage == 0) {
+            self.staticImageView.transform = CGAffineTransformMakeScale(0, 0);
+            [UIView animateWithDuration:0.3 animations:^{
+                self.staticImageView.alpha = 1;
+                self.staticImageView.transform = CGAffineTransformMakeScale(1.2, 1.2);
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:0.2 animations:^{
+                    self.staticImageView.transform = CGAffineTransformMakeScale(1, 1);
+                }];
+            }];
+        } else if (self.animationStaticImage == 1) {
+
+        } else {
+            self.staticImageView.alpha = 1;
+        }
+
+        if ([self.mainView.subviews containsObject:self.staticImageViewSecond]) {
+            [self.staticImageViewSecond removeFromSuperview];
+        }
     }
 
-    if ([self.secondPageFirst intValue] == (int)page) {
+    if ([self.secondPageFirst intValue] == (int)page && ![self.mainView.subviews containsObject:self.staticImageViewSecond]) {
         [self.mainView addSubview:self.staticImageViewSecond];
+        self.staticImageViewSecond.alpha = 0;
+
+        if (self.animationStaticImageSecond == 0) {
+            self.staticImageViewSecond.transform = CGAffineTransformMakeScale(0, 0);
+            [UIView animateWithDuration:0.3 animations:^{
+                self.staticImageViewSecond.alpha = 1;
+                self.staticImageViewSecond.transform = CGAffineTransformMakeScale(1.2, 1.2);
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:0.2 animations:^{
+                    self.staticImageViewSecond.transform = CGAffineTransformMakeScale(1, 1);
+                }];
+            }];
+        } else if (self.animationStaticImageSecond == 1) {
+
+        } else {
+            self.staticImageViewSecond.alpha = 1;
+        }
     } else if ([self.secondPageSecond intValue] == (int)page) {
         [self.staticImageViewSecond removeFromSuperview];
     }
