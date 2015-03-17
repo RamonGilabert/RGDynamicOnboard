@@ -12,4 +12,8 @@
 - (void)addStaticImage:(UIImage *)image inFrame:(CGRect)frame;
 - (void)addText:(NSString *)string inPage:(int)page;
 
+- (void)addBackgroundImage:(UIImage *)image;
+- (void)addBackgroundImage:(UIImage *)image withFrame:(CGRect)frame;
+- (void)addBackgroundImage:(UIImage *)image withX:(CGFloat)xValue withY:(CGFloat)yValue withAllWidthAndHeight:(CGFloat)height;
+
 @end

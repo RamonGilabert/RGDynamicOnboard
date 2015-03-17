@@ -14,6 +14,7 @@
 @property CGFloat scrollOffset;
 @property (strong, nonatomic) UIButton *buttonDismiss;
 @property (strong, nonatomic) UIImageView *staticImageView;
+@property (strong, nonatomic) UIImageView *backgroundImageView;
 
 @end
 
@@ -62,6 +63,26 @@
     [self loadScrollViewWithPage:3];
 
     return self;
+}
+
+- (void)addBackgroundImage:(UIImage *)image
+{
+    if (image) {
+        self.backgroundImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width*self.numberOfPages, self.deviceHeight)];
+        self.backgroundImageView.contentMode = UIViewContentModeScaleAspectFill;
+        self.backgroundImageView.image = image;
+        [self insertSubview:self.backgroundImageView atIndex:0];
+    }
+}
+
+- (void)addBackgroundImage:(UIImage *)image withFrame:(CGRect)frame
+{
+
+}
+
+- (void)addBackgroundImage:(UIImage *)image withX:(CGFloat)xValue withY:(CGFloat)yValue withAllWidthAndHeight:(CGFloat)height
+{
+
 }
 
 - (void)addStaticImage:(UIImage *)image inPosition:(int)position
