@@ -42,6 +42,8 @@
 
     self.mainSlideView = [[RGDynamicOnboard alloc] initFullscreenWithNumberOfSlides:3 andPageControl:YES inView:self.view];
     [self.mainSlideView addBackgroundImage:[UIImage imageNamed:@"mountain"]];
+    [self.mainSlideView addText:@"Like magic, a background image all over the place" inPage:0 withColor:[UIColor whiteColor]];
+    [self.mainSlideView addText:@"Add then text to pages" inPage:1 withColor:[UIColor whiteColor]];
 }
 
 #pragma mark - Change color status bar

@@ -92,6 +92,8 @@
         if (frame.origin.y > self.deviceHeight/2 || frame.size.height >= self.deviceHeight) {
             self.pageControl.currentPageIndicatorTintColor = [UIColor whiteColor];
             self.pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
+            self.buttonDismiss.layer.borderColor = [UIColor whiteColor].CGColor;
+            [self.buttonDismiss setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         }
     }
 }
@@ -103,6 +105,14 @@
         self.backgroundImageView.contentMode = UIViewContentModeScaleAspectFill;
         self.backgroundImageView.image = image;
         [self insertSubview:self.backgroundImageView atIndex:0];
+
+        if (yValue > self.deviceHeight/2 || height >= self.deviceHeight) {
+            self.pageControl.currentPageIndicatorTintColor = [UIColor whiteColor];
+            self.pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
+            
+            self.buttonDismiss.layer.borderColor = [UIColor whiteColor].CGColor;
+            [self.buttonDismiss setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        }
     }
 }
 
@@ -134,6 +144,21 @@
         self.staticImageView.image = image;
         [self.viewMain addSubview:self.staticImageView];
     }
+}
+
+- (void)addText:(NSString *)string inPage:(int)page withColor:(UIColor *)color
+{
+    UIView *view = [self.arrayWithSlides objectAtIndex:page];
+    UILabel *labelOfText = [[UILabel alloc] initWithFrame:CGRectMake(25, self.deviceHeight - self.deviceHeight/6, self.deviceWidth - 50, 200)];
+    labelOfText.numberOfLines = 10;
+    labelOfText.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:22];
+    labelOfText.textColor = color;
+    labelOfText.textAlignment = NSTextAlignmentCenter;
+    labelOfText.text = string;
+    [labelOfText sizeToFit];
+    CGRect rectOfLabel = labelOfText.frame;
+    labelOfText.frame = CGRectMake((self.deviceWidth - rectOfLabel.size.width)/2, self.deviceHeight - rectOfLabel.size.height - self.deviceHeight/4, rectOfLabel.size.width, rectOfLabel.size.height);
+    [view addSubview:labelOfText];
 }
 
 - (void)addText:(NSString *)string inPage:(int)page

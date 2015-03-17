@@ -11,6 +11,7 @@
 - (void)addStaticImage:(UIImage *)image inPosition:(int)position;
 - (void)addStaticImage:(UIImage *)image inFrame:(CGRect)frame;
 - (void)addText:(NSString *)string inPage:(int)page;
+- (void)addText:(NSString *)string inPage:(int)page withColor:(UIColor *)color;
 
 - (void)addBackgroundImage:(UIImage *)image;
 - (void)addBackgroundImage:(UIImage *)image withFrame:(CGRect)frame;
