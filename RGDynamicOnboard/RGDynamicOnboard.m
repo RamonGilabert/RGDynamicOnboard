@@ -407,7 +407,15 @@
                 }];
             }];
         } else if (self.animationStaticImage == 1) {
-
+            self.staticImageView.transform = CGAffineTransformMakeTranslation(10, -500);
+            [UIView animateWithDuration:0.3 animations:^{
+                self.staticImageView.alpha = 1;
+                self.staticImageView.transform = CGAffineTransformMakeTranslation(0, 20);
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:0.2 animations:^{
+                    self.staticImageView.transform = CGAffineTransformMakeTranslation(0, 0);
+                }];
+            }];
         } else {
             self.staticImageView.alpha = 1;
         }
@@ -432,7 +440,15 @@
                 }];
             }];
         } else if (self.animationStaticImageSecond == 1) {
-
+            self.staticImageViewSecond.transform = CGAffineTransformMakeTranslation(10, -500);
+            [UIView animateWithDuration:0.3 animations:^{
+                self.staticImageViewSecond.alpha = 1;
+                self.staticImageViewSecond.transform = CGAffineTransformMakeTranslation(0, 20);
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:0.2 animations:^{
+                    self.staticImageViewSecond.transform = CGAffineTransformMakeTranslation(0, 0);
+                }];
+            }];
         } else {
             self.staticImageViewSecond.alpha = 1;
         }

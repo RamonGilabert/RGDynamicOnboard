@@ -50,7 +50,7 @@
 
 #pragma mark - Fourth example
 
-    [self.mainSlideView addStaticImage:[UIImage imageNamed:@"firstImage"] inPosition:3 fromPage:0 toPage:1 withAnimationAppearance:0];
+    [self.mainSlideView addStaticImage:[UIImage imageNamed:@"firstImage"] inPosition:3 fromPage:0 toPage:1 withAnimationAppearance:1];
     [self.mainSlideView addStaticImage:[UIImage imageNamed:@"secondImage"] inPosition:3 fromPage:1 toPage:3 withAnimationAppearance:0];
 }
 
