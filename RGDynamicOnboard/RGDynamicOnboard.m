@@ -26,6 +26,7 @@
 @property int pageToPerformFirstAnimation;
 @property int pageToPerformSecondAnimation;
 @property CGRect frameToGo;
+@property CGFloat lastOffset;
 
 @end
 
@@ -393,6 +394,25 @@
                 imageViewToAnimateFollowingPage = (UIImageView *)viewWeTake;
             }
         }
+    }
+
+    CGFloat velocityOfScroll = (realLocation - self.lastOffset);
+
+    if (velocityOfScroll < 0) {
+        velocityOfScroll = velocityOfScroll * -1;
+    }
+
+    CGFloat floatValue = (self.frameToGo.origin.y - self.imageViewThatMoves.frame.origin.y)/self.frame.size.width;
+    CGFloat floatValueX = (self.frameToGo.origin.x - self.imageViewThatMoves.frame.origin.x)/self.frame.size.width;
+    CGFloat floatValueHeight = (self.frameToGo.size.height - self.imageViewThatMoves.frame.size.height)/self.frame.size.width;
+    CGFloat floatValueWidth = (self.frameToGo.size.width - self.imageViewThatMoves.frame.size.width)/self.frame.size.width;
+
+    self.imageViewThatMoves.frame = CGRectMake(self.imageViewThatMoves.frame.origin.x + (floatValueX*velocityOfScroll), self.imageViewThatMoves.frame.origin.y + (floatValue*velocityOfScroll), self.imageViewThatMoves.frame.size.width + (floatValueHeight*velocityOfScroll), self.imageViewThatMoves.frame.size.height + (floatValueWidth*velocityOfScroll));
+
+    if (velocityOfScroll > 100) {
+        self.lastOffset = realLocation + 30;
+    } else {
+        self.lastOffset = realLocation - 10;
     }
 
     if (![self.arrayOfAnimations[page] isKindOfClass:[NSNull class]]) {
