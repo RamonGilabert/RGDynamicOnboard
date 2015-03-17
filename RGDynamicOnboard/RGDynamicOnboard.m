@@ -16,10 +16,10 @@
 @property (strong, nonatomic) UIImageView *staticImageView;
 @property (strong, nonatomic) UIImageView *staticImageViewSecond;
 @property (strong, nonatomic) UIImageView *backgroundImageView;
-@property int firstPageFirst;
-@property int firstPageSecond;
-@property int secondPageFirst;
-@property int secondPageSecond;
+@property (weak, nonatomic) NSNumber *firstPageFirst;
+@property (weak, nonatomic) NSNumber * firstPageSecond;
+@property (weak, nonatomic) NSNumber * secondPageFirst;
+@property (weak, nonatomic) NSNumber * secondPageSecond;
 
 @end
 
@@ -144,9 +144,8 @@
 - (void)addStaticImage:(UIImage *)image inPosition:(int)position fromPage:(int)firstPage toPage:(int)secondPage
 {
     if (!self.firstPageFirst) {
-
-        self.firstPageFirst = firstPage;
-        self.firstPageSecond = secondPage;
+        self.firstPageFirst = [NSNumber numberWithInt:firstPage];
+        self.firstPageSecond = [NSNumber numberWithInt:secondPage];
 
         self.staticImageView = [UIImageView new];
 
@@ -164,8 +163,8 @@
         self.staticImageView.image = image;
 
     } else {
-        self.secondPageFirst = firstPage;
-        self.secondPageSecond = secondPage;
+        self.secondPageFirst = [NSNumber numberWithInt:firstPage];
+        self.secondPageSecond = [NSNumber numberWithInt:secondPage];
 
         self.staticImageViewSecond = [UIImageView new];
 
@@ -184,7 +183,6 @@
     }
 
     [self.viewMain addSubview:self.staticImageView];
-    [self.viewMain addSubview:self.staticImageViewSecond];
 }
 
 - (void)addStaticImage:(UIImage *)image inFrame:(CGRect)frame
@@ -261,6 +259,8 @@
     } completion:^(BOOL finished) {
         if (self.staticImageView) {
             [self.staticImageView removeFromSuperview];
+        } else if (self.staticImageViewSecond) {
+            [self.staticImageViewSecond removeFromSuperview];
         }
         [self removeFromSuperview];
     }];
@@ -383,6 +383,16 @@
     [self loadScrollViewWithPage:page + 1];
     [self loadScrollViewWithPage:page + 2];
     [self loadScrollViewWithPage:page + 3];
+
+    if ([self.firstPageSecond intValue] == (int)page) {
+        [self.staticImageView removeFromSuperview];
+    }
+
+    if ([self.secondPageFirst intValue] == (int)page) {
+        [self.mainView addSubview:self.staticImageViewSecond];
+    } else if ([self.secondPageSecond intValue] == (int)page) {
+        [self.staticImageViewSecond removeFromSuperview];
+    }
 }
 
 #pragma mark - Helper methods
