@@ -260,14 +260,23 @@
             self.staticImageView.transform = CGAffineTransformMakeScale(3, 3);
             self.staticImageView.alpha = 0;
         }
+
+        if (self.staticImageViewSecond) {
+            self.staticImageViewSecond.transform = CGAffineTransformMakeScale(3, 3);
+            self.staticImageViewSecond.alpha = 0;
+        }
+
         self.transform = CGAffineTransformMakeScale(3, 3);
         self.alpha = 0;
     } completion:^(BOOL finished) {
         if (self.staticImageView) {
             [self.staticImageView removeFromSuperview];
-        } else if (self.staticImageViewSecond) {
+        }
+
+        if (self.staticImageViewSecond) {
             [self.staticImageViewSecond removeFromSuperview];
         }
+
         [self removeFromSuperview];
     }];
 }
