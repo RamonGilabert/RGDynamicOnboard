@@ -10,6 +10,8 @@
 
 - (void)addStaticImage:(UIImage *)image inPosition:(int)position;
 - (void)addStaticImage:(UIImage *)image inFrame:(CGRect)frame;
+- (void)addStaticImage:(UIImage *)image inPosition:(int)position fromPage:(int)firstPage toPage:(int)secondPage;
+
 - (void)addText:(NSString *)string inPage:(int)page;
 - (void)addText:(NSString *)string inPage:(int)page withColor:(UIColor *)color;
 
