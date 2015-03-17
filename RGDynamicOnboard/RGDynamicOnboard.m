@@ -14,7 +14,12 @@
 @property CGFloat scrollOffset;
 @property (strong, nonatomic) UIButton *buttonDismiss;
 @property (strong, nonatomic) UIImageView *staticImageView;
+@property (strong, nonatomic) UIImageView *staticImageViewSecond;
 @property (strong, nonatomic) UIImageView *backgroundImageView;
+@property int firstPageFirst;
+@property int firstPageSecond;
+@property int secondPageFirst;
+@property int secondPageSecond;
 
 @end
 
@@ -138,22 +143,48 @@
 
 - (void)addStaticImage:(UIImage *)image inPosition:(int)position fromPage:(int)firstPage toPage:(int)secondPage
 {
-    self.staticImageView = [UIImageView new];
+    if (!self.firstPageFirst) {
 
-    if (position == 0) {
-        self.staticImageView.frame = CGRectMake((self.deviceWidth - self.deviceWidth/1.7)/2, (self.deviceHeight - self.deviceHeight/3)/2 - 25, self.deviceWidth/1.7, self.deviceHeight/3);
-    } else if (position == 1) {
-        self.staticImageView.frame = CGRectMake((self.deviceWidth - self.deviceWidth/1.7)/2 + 60, (self.deviceHeight - self.deviceHeight/3)/2 - 100, self.deviceWidth/1.7, self.deviceHeight/3);
-    } else if (position == 2) {
-        self.staticImageView.frame = CGRectMake((self.deviceWidth - self.deviceWidth/1.7)/2 - 60, (self.deviceHeight - self.deviceHeight/3)/2 - 100, self.deviceWidth/1.7, self.deviceHeight/3);
+        self.firstPageFirst = firstPage;
+        self.firstPageSecond = secondPage;
+
+        self.staticImageView = [UIImageView new];
+
+        if (position == 0) {
+            self.staticImageView.frame = CGRectMake((self.deviceWidth - self.deviceWidth/1.7)/2, (self.deviceHeight - self.deviceHeight/3)/2 - 25, self.deviceWidth/1.7, self.deviceHeight/3);
+        } else if (position == 1) {
+            self.staticImageView.frame = CGRectMake((self.deviceWidth - self.deviceWidth/1.7)/2 + 60, (self.deviceHeight - self.deviceHeight/3)/2 - 100, self.deviceWidth/1.7, self.deviceHeight/3);
+        } else if (position == 2) {
+            self.staticImageView.frame = CGRectMake((self.deviceWidth - self.deviceWidth/1.7)/2 - 60, (self.deviceHeight - self.deviceHeight/3)/2 - 100, self.deviceWidth/1.7, self.deviceHeight/3);
+        } else {
+            self.staticImageView.frame = CGRectMake((self.deviceWidth - self.deviceWidth/1.7)/2, (self.deviceHeight - self.deviceHeight/3)/2 - 100, self.deviceWidth/1.7, self.deviceHeight/3);
+        }
+
+        self.staticImageView.contentMode = UIViewContentModeScaleAspectFill;
+        self.staticImageView.image = image;
+
     } else {
-        self.staticImageView.frame = CGRectMake((self.deviceWidth - self.deviceWidth/1.7)/2, (self.deviceHeight - self.deviceHeight/3)/2 - 100, self.deviceWidth/1.7, self.deviceHeight/3);
+        self.secondPageFirst = firstPage;
+        self.secondPageSecond = secondPage;
+
+        self.staticImageViewSecond = [UIImageView new];
+
+        if (position == 0) {
+            self.staticImageViewSecond.frame = CGRectMake((self.deviceWidth - self.deviceWidth/1.7)/2, (self.deviceHeight - self.deviceHeight/3)/2 - 25, self.deviceWidth/1.7, self.deviceHeight/3);
+        } else if (position == 1) {
+            self.staticImageViewSecond.frame = CGRectMake((self.deviceWidth - self.deviceWidth/1.7)/2 + 60, (self.deviceHeight - self.deviceHeight/3)/2 - 100, self.deviceWidth/1.7, self.deviceHeight/3);
+        } else if (position == 2) {
+            self.staticImageViewSecond.frame = CGRectMake((self.deviceWidth - self.deviceWidth/1.7)/2 - 60, (self.deviceHeight - self.deviceHeight/3)/2 - 100, self.deviceWidth/1.7, self.deviceHeight/3);
+        } else {
+            self.staticImageViewSecond.frame = CGRectMake((self.deviceWidth - self.deviceWidth/1.7)/2, (self.deviceHeight - self.deviceHeight/3)/2 - 100, self.deviceWidth/1.7, self.deviceHeight/3);
+        }
+
+        self.staticImageViewSecond.contentMode = UIViewContentModeScaleAspectFill;
+        self.staticImageViewSecond.image = image;
     }
 
-    self.staticImageView.contentMode = UIViewContentModeScaleAspectFill;
-    self.staticImageView.image = image;
-
-    //[self.viewMain addSubview:self.staticImageView];
+    [self.viewMain addSubview:self.staticImageView];
+    [self.viewMain addSubview:self.staticImageViewSecond];
 }
 
 - (void)addStaticImage:(UIImage *)image inFrame:(CGRect)frame
