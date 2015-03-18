@@ -453,12 +453,12 @@
     }
 
     if (self.pageToPerformThirdAnimation == (int)page) {
-        CGFloat floatValue = (self.frameToGo.origin.y - self.initialFrameOnceAnimationDone.origin.y)/self.frame.size.width;
-        CGFloat floatValueX = (self.frameToGo.origin.x - self.initialFrameOnceAnimationDone.origin.x)/self.frame.size.width;
-        CGFloat floatValueHeight = (self.frameToGo.size.height - self.initialFrameOnceAnimationDone.size.height)/self.frame.size.width;
-        CGFloat floatValueWidth = (self.frameToGo.size.width - self.initialFrameOnceAnimationDone.size.width)/self.frame.size.width;
+        CGFloat floatValue = (self.frameToGo.origin.y - self.finalFrameOnceAnimationDone.origin.y)/self.frame.size.width;
+        CGFloat floatValueX = (self.frameToGo.origin.x - self.finalFrameOnceAnimationDone.origin.x)/self.frame.size.width;
+        CGFloat floatValueHeight = (self.frameToGo.size.height - self.finalFrameOnceAnimationDone.size.height)/self.frame.size.width;
+        CGFloat floatValueWidth = (self.frameToGo.size.width - self.finalFrameOnceAnimationDone.size.width)/self.frame.size.width;
 
-        self.imageViewThatMoves.frame = CGRectMake(self.frameToGo.origin.x + self.scrollOffset*floatValueX, self.frameToGo.origin.y + self.scrollOffset*floatValue, self.frameToGo.size.width + self.scrollOffset*floatValueWidth, self.frameToGo.size.height + self.scrollOffset*floatValueHeight);
+        self.imageViewThatMoves.frame = CGRectMake(self.frameToGo.origin.x - self.scrollOffset*floatValueX, self.frameToGo.origin.y - self.scrollOffset*floatValue, self.frameToGo.size.width - self.scrollOffset*floatValueWidth, self.frameToGo.size.height - self.scrollOffset*floatValueHeight);
     }
 
     if (![self.arrayOfAnimations[page] isKindOfClass:[NSNull class]]) {
