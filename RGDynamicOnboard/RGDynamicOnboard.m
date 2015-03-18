@@ -79,6 +79,33 @@
     return self;
 }
 
+- (void)setBackgroundColorAllScrollView:(UIColor *)backgroundColorAllScrollView
+{
+    self.viewMain.backgroundColor = backgroundColorAllScrollView;
+
+    if (self.pageControl) {
+        CGFloat hueColor;
+        CGFloat saturationColor;
+        CGFloat brightnessColor;
+        CGFloat alphaColor;
+
+        [backgroundColorAllScrollView getHue:&hueColor saturation:&saturationColor brightness:&brightnessColor alpha:&alphaColor];
+
+        self.pageControl.currentPageIndicatorTintColor = [UIColor colorWithHue:hueColor saturation:saturationColor brightness:brightnessColor-0.4 alpha:alphaColor];
+        self.pageControl.pageIndicatorTintColor = [UIColor colorWithHue:hueColor saturation:saturationColor brightness:brightnessColor-0.2 alpha:alphaColor];
+    }
+}
+
+- (void)setCornerRadiusButtonColor:(UIColor *)cornerRadiusButtonColor
+{
+    self.buttonDismiss.layer.borderColor = cornerRadiusButtonColor.CGColor;
+}
+
+- (void)setFontButtonColor:(UIColor *)fontButtonColor
+{
+    [self.buttonDismiss setTitleColor:fontButtonColor forState:UIControlStateNormal];
+}
+
 - (void)addEditableStaticImage:(UIImage *)image inPage:(int)page inFrame:(CGRect)initialFrame andGoToFrame:(CGRect)secondFrame toPage:(int)pageToGo
 {
     if (image) {
