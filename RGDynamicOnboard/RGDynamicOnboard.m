@@ -115,12 +115,32 @@
 
 - (void)addImage:(UIImage *)image inFrame:(CGRect)frame inPage:(int)page withAnimation:(int)animation
 {
+    if (page >= self.numberOfPages) return;
 
+    UIView *view = [self.arrayWithSlides objectAtIndex:page];
+
+    if ((NSNull *)view == [NSNull null]) {
+        view = [UIView new];
+        [self.arrayWithSlides replaceObjectAtIndex:page withObject:view];
+    }
+
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:frame];
+    imageView.contentMode = UIViewContentModeScaleAspectFill;
+    imageView.image = image;
+
+    [view addSubview:imageView];
 }
 
 - (void)addString:(NSString *)text inFrame:(CGRect)frame inPage:(int)page withAnimation:(int)animation
 {
+    if (page >= self.numberOfPages) return;
 
+    UIView *view = [self.arrayWithSlides objectAtIndex:page];
+
+    if ((NSNull *)view == [NSNull null]) {
+        view = [UIView new];
+        [self.arrayWithSlides replaceObjectAtIndex:page withObject:view];
+    }
 }
 
 - (void)addEditableStaticImage:(UIImage *)image inPage:(int)page inFrame:(CGRect)initialFrame andGoToFrame:(CGRect)secondFrame toPage:(int)pageToGo

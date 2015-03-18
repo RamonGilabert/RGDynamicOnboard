@@ -62,7 +62,8 @@
 //    self.mainSlideView.dismissButtonFontColor = [UIColor whiteColor];
 
 #pragma mark - Sixth example
-    
+
+    [self.mainSlideView addImage:[UIImage imageNamed:@"firstImage"] inFrame:CGRectMake((self.deviceWidth - 200)/2, 200, 200, 200) inPage:1 withAnimation:0];
 
 }
 
