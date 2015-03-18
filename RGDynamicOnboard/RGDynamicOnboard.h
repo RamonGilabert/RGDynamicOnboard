@@ -27,5 +27,7 @@
 
 - (void)addImage:(UIImage *)image inFrame:(CGRect)frame inPage:(int)page withAnimation:(int)animation;
 - (void)addString:(NSString *)text inFrame:(CGRect)frame inPage:(int)page withAnimation:(int)animation;
+- (void)addString:(NSString *)text andFont:(UIFont *)font inFrame:(CGRect)frame inPage:(int)page withAnimation:(int)animation;
+- (void)addString:(NSString *)text andFont:(UIFont *)font andTextColor:(UIColor *)color inFrame:(CGRect)frame inPage:(int)page withAnimation:(int)animation;
 
 @end

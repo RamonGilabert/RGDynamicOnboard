@@ -141,6 +141,54 @@
         view = [UIView new];
         [self.arrayWithSlides replaceObjectAtIndex:page withObject:view];
     }
+
+    UILabel *label = [[UILabel alloc] initWithFrame:frame];
+    label.text = text;
+    label.textColor = [UIColor darkGrayColor];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.font = [UIFont fontWithName:@"Helvetica" size:22];
+
+    [view addSubview:label];
+}
+
+- (void)addString:(NSString *)text andFont:(UIFont *)font inFrame:(CGRect)frame inPage:(int)page withAnimation:(int)animation
+{
+    if (page >= self.numberOfPages) return;
+
+    UIView *view = [self.arrayWithSlides objectAtIndex:page];
+
+    if ((NSNull *)view == [NSNull null]) {
+        view = [UIView new];
+        [self.arrayWithSlides replaceObjectAtIndex:page withObject:view];
+    }
+
+    UILabel *label = [[UILabel alloc] initWithFrame:frame];
+    label.text = text;
+    label.textColor = [UIColor darkGrayColor];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.font = font;
+
+    [view addSubview:label];
+}
+
+- (void)addString:(NSString *)text andFont:(UIFont *)font andTextColor:(UIColor *)color inFrame:(CGRect)frame inPage:(int)page withAnimation:(int)animation
+{
+    if (page >= self.numberOfPages) return;
+
+    UIView *view = [self.arrayWithSlides objectAtIndex:page];
+
+    if ((NSNull *)view == [NSNull null]) {
+        view = [UIView new];
+        [self.arrayWithSlides replaceObjectAtIndex:page withObject:view];
+    }
+
+    UILabel *label = [[UILabel alloc] initWithFrame:frame];
+    label.text = text;
+    label.textColor = color;
+    label.textAlignment = NSTextAlignmentCenter;
+    label.font = font;
+
+    [view addSubview:label];
 }
 
 - (void)addEditableStaticImage:(UIImage *)image inPage:(int)page inFrame:(CGRect)initialFrame andGoToFrame:(CGRect)secondFrame toPage:(int)pageToGo
