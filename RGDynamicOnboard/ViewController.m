@@ -55,7 +55,8 @@
 
 #pragma mark - Fifth example
 
-    [self.mainSlideView addEditableStaticImage:[UIImage imageNamed:@"thirdImage"] inPage:0 inFrame:CGRectMake((self.deviceWidth - 200)/2, 200, 200, 200) andGoToFrame:CGRectMake((self.deviceWidth - 100)/2, 0, 100, 100) toPage:2];
+    [self.mainSlideView addEditableStaticImage:[UIImage imageNamed:@"thirdImage"] inPage:0 inFrame:CGRectMake((self.deviceWidth - 200)/2, 200, 200, 200) andGoToFrame:CGRectMake((self.deviceWidth - 100)/2, 0, 100, 100) toPage:1];
+    [self.mainSlideView image:[UIImage imageNamed:@"thirdImage"] toGoFromPage:1 toFrame:CGRectMake((self.deviceWidth - 200)/2, 200, 200, 200)];
     self.mainSlideView.backgroundColorAllScrollView = [UIColor redColor];
     self.mainSlideView.dismissButtonCornerColor = [UIColor whiteColor];
     self.mainSlideView.dismissButtonFontColor = [UIColor whiteColor];

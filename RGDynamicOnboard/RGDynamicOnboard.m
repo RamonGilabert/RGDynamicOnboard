@@ -27,6 +27,9 @@
 @property int pageToPerformSecondAnimation;
 @property CGRect frameToGo;
 @property CGRect initialFrame;
+@property CGRect initialFrameOnceAnimationDone;
+@property CGRect finalFrameOnceAnimationDone;
+@property int pageToPerformThirdAnimation;
 
 @end
 
@@ -35,6 +38,10 @@
 - (instancetype)initFullscreenWithNumberOfSlides:(int)slides andPageControl:(BOOL)pageControl inView:(UIView *)view
 {
     self = [RGDynamicOnboard new];
+
+    self.pageToPerformFirstAnimation = 100;
+    self.pageToPerformSecondAnimation = 100;
+    self.pageToPerformThirdAnimation = 100;
 
     self.viewMain = [UIView new];
     self.viewMain = view;
@@ -123,9 +130,12 @@
     }
 }
 
-- (void)image:(UIImage *)image toGoFromPage:(int)page toFrame:(CGRect)lastFrame toPage:(int)pageToGo
+- (void)image:(UIImage *)image toGoFromPage:(int)page toFrame:(CGRect)lastFrame
 {
-
+    if ([self.imageViewThatMoves.image isEqual:image]) {
+        self.pageToPerformThirdAnimation = page;
+        self.finalFrameOnceAnimationDone = lastFrame;
+    }
 }
 
 - (void)addBackgroundImage:(UIImage *)image
@@ -433,13 +443,22 @@
         }
     }
 
-    CGFloat floatValue = (self.frameToGo.origin.y - self.initialFrame.origin.y)/self.frame.size.width;
-    CGFloat floatValueX = (self.frameToGo.origin.x - self.initialFrame.origin.x)/self.frame.size.width;
-    CGFloat floatValueHeight = (self.frameToGo.size.height - self.initialFrame.size.height)/self.frame.size.width;
-    CGFloat floatValueWidth = (self.frameToGo.size.width - self.initialFrame.size.width)/self.frame.size.width;
-
     if (self.pageToPerformSecondAnimation == (int)page) {
+        CGFloat floatValue = (self.frameToGo.origin.y - self.initialFrame.origin.y)/self.frame.size.width;
+        CGFloat floatValueX = (self.frameToGo.origin.x - self.initialFrame.origin.x)/self.frame.size.width;
+        CGFloat floatValueHeight = (self.frameToGo.size.height - self.initialFrame.size.height)/self.frame.size.width;
+        CGFloat floatValueWidth = (self.frameToGo.size.width - self.initialFrame.size.width)/self.frame.size.width;
+
         self.imageViewThatMoves.frame = CGRectMake(self.initialFrame.origin.x + self.scrollOffset*floatValueX, self.initialFrame.origin.y + self.scrollOffset*floatValue, self.initialFrame.size.width + self.scrollOffset*floatValueWidth, self.initialFrame.size.height + self.scrollOffset*floatValueHeight);
+    }
+
+    if (self.pageToPerformThirdAnimation == (int)page) {
+        CGFloat floatValue = (self.frameToGo.origin.y - self.initialFrameOnceAnimationDone.origin.y)/self.frame.size.width;
+        CGFloat floatValueX = (self.frameToGo.origin.x - self.initialFrameOnceAnimationDone.origin.x)/self.frame.size.width;
+        CGFloat floatValueHeight = (self.frameToGo.size.height - self.initialFrameOnceAnimationDone.size.height)/self.frame.size.width;
+        CGFloat floatValueWidth = (self.frameToGo.size.width - self.initialFrameOnceAnimationDone.size.width)/self.frame.size.width;
+
+        self.imageViewThatMoves.frame = CGRectMake(self.frameToGo.origin.x + self.scrollOffset*floatValueX, self.frameToGo.origin.y + self.scrollOffset*floatValue, self.frameToGo.size.width + self.scrollOffset*floatValueWidth, self.frameToGo.size.height + self.scrollOffset*floatValueHeight);
     }
 
     if (![self.arrayOfAnimations[page] isKindOfClass:[NSNull class]]) {

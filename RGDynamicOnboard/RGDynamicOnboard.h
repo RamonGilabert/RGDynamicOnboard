@@ -24,6 +24,6 @@
 - (void)addBackgroundImage:(UIImage *)image withX:(CGFloat)xValue withY:(CGFloat)yValue withAllWidthAndHeight:(CGFloat)height;
 
 - (void)addEditableStaticImage:(UIImage *)image inPage:(int)page inFrame:(CGRect)initialFrame andGoToFrame:(CGRect)secondFrame toPage:(int)pageToGo;
-- (void)image:(UIImage *)image toGoFromPage:(int)page toFrame:(CGRect)lastFrame toPage:(int)pageToGo;
+- (void)image:(UIImage *)image toGoFromPage:(int)page toFrame:(CGRect)lastFrame;
 
 @end
