@@ -7,7 +7,6 @@
 @property (strong, nonatomic) UIColor *dismissButtonFontColor;
 
 - (instancetype)initFullscreenWithNumberOfSlides:(int)slides andPageControl:(BOOL)pageControl inView:(UIView *)view;
-//- (instancetype)initWithPaddingTop:(float)padding numberOfSlides:(int)slides andPageControl:(BOOL)pageControl;
 
 - (void)addImage:(UIImage *)image andText:(NSString *)string toPageNumber:(int)page;
 - (void)applyAnimationNumber:(int)animation toGoFromPage:(int)page;
@@ -25,5 +24,8 @@
 
 - (void)addEditableStaticImage:(UIImage *)image inPage:(int)page inFrame:(CGRect)initialFrame andGoToFrame:(CGRect)secondFrame toPage:(int)pageToGo;
 - (void)image:(UIImage *)image toGoFromPage:(int)page toFrame:(CGRect)lastFrame;
+
+- (void)addImage:(UIImage *)image inFrame:(CGRect)frame inPage:(int)page withAnimation:(int)animation;
+- (void)addString:(NSString *)text inFrame:(CGRect)frame inPage:(int)page withAnimation:(int)animation;
 
 @end

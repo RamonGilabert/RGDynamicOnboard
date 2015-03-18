@@ -113,6 +113,16 @@
     [self.buttonDismiss setTitleColor:dismissButtonFontColor forState:UIControlStateNormal];
 }
 
+- (void)addImage:(UIImage *)image inFrame:(CGRect)frame inPage:(int)page withAnimation:(int)animation
+{
+
+}
+
+- (void)addString:(NSString *)text inFrame:(CGRect)frame inPage:(int)page withAnimation:(int)animation
+{
+
+}
+
 - (void)addEditableStaticImage:(UIImage *)image inPage:(int)page inFrame:(CGRect)initialFrame andGoToFrame:(CGRect)secondFrame toPage:(int)pageToGo
 {
     if (image) {
