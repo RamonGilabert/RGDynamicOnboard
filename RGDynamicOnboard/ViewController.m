@@ -57,8 +57,8 @@
 
     [self.mainSlideView addEditableStaticImage:[UIImage imageNamed:@"thirdImage"] inPage:0 inFrame:CGRectMake((self.deviceWidth - 200)/2, 200, 200, 200) andGoToFrame:CGRectMake((self.deviceWidth - 100)/2, 0, 100, 100) toPage:2];
     self.mainSlideView.backgroundColorAllScrollView = [UIColor redColor];
-    self.mainSlideView.cornerRadiusButtonColor = [UIColor whiteColor];
-    self.mainSlideView.fontButtonColor = [UIColor whiteColor];
+    self.mainSlideView.dismissButtonCornerColor = [UIColor whiteColor];
+    self.mainSlideView.dismissButtonFontColor = [UIColor whiteColor];
 
 }
 

@@ -3,8 +3,8 @@
 @interface RGDynamicOnboard : UIScrollView
 
 @property (strong, nonatomic) UIColor *backgroundColorAllScrollView;
-@property (strong, nonatomic) UIColor *cornerRadiusButtonColor;
-@property (strong, nonatomic) UIColor *fontButtonColor;
+@property (strong, nonatomic) UIColor *dismissButtonCornerColor;
+@property (strong, nonatomic) UIColor *dismissButtonFontColor;
 
 - (instancetype)initFullscreenWithNumberOfSlides:(int)slides andPageControl:(BOOL)pageControl inView:(UIView *)view;
 //- (instancetype)initWithPaddingTop:(float)padding numberOfSlides:(int)slides andPageControl:(BOOL)pageControl;

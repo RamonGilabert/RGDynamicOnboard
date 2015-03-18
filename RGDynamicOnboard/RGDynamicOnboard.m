@@ -96,14 +96,14 @@
     }
 }
 
-- (void)setCornerRadiusButtonColor:(UIColor *)cornerRadiusButtonColor
+- (void)setDismissButtonCornerColor:(UIColor *)dismissButtonCornerColor
 {
-    self.buttonDismiss.layer.borderColor = cornerRadiusButtonColor.CGColor;
+    self.buttonDismiss.layer.borderColor = dismissButtonCornerColor.CGColor;
 }
 
-- (void)setFontButtonColor:(UIColor *)fontButtonColor
+- (void)setDismissButtonFontColor:(UIColor *)dismissButtonFontColor
 {
-    [self.buttonDismiss setTitleColor:fontButtonColor forState:UIControlStateNormal];
+    [self.buttonDismiss setTitleColor:dismissButtonFontColor forState:UIControlStateNormal];
 }
 
 - (void)addEditableStaticImage:(UIImage *)image inPage:(int)page inFrame:(CGRect)initialFrame andGoToFrame:(CGRect)secondFrame toPage:(int)pageToGo
