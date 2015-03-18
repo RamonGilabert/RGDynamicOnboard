@@ -55,7 +55,7 @@
 
 #pragma mark - Fifth example
 
-    [self.mainSlideView addEditableStaticImage:[UIImage imageNamed:@"thirdImage"] inPage:0 inFrame:CGRectMake((self.deviceWidth - 200)/2, 200, 200, 200) andGoToFrame:CGRectMake((self.deviceWidth - 100)/2, 0, 100, 100) toPage:1];
+    [self.mainSlideView addEditableStaticImage:[UIImage imageNamed:@"thirdImage"] inPage:0 inFrame:CGRectMake((self.deviceWidth - 200)/2, 200, 200, 200) andGoToFrame:CGRectMake((self.deviceWidth - 100)/2, 0, 100, 100) toPage:2];
 
 }
 

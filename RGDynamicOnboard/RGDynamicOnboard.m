@@ -26,7 +26,6 @@
 @property int pageToPerformFirstAnimation;
 @property int pageToPerformSecondAnimation;
 @property CGRect frameToGo;
-@property CGFloat lastOffset;
 @property CGRect initialFrame;
 
 @end
@@ -88,7 +87,7 @@
         self.imageViewThatMoves.image = image;
         self.frameToGo = secondFrame;
         self.pageToPerformFirstAnimation = page;
-        self.pageToPerformSecondAnimation = pageToGo;
+        self.pageToPerformSecondAnimation = pageToGo - 1;
         self.initialFrame = initialFrame;
 
         if (page == 0) {
@@ -296,6 +295,11 @@
             self.staticImageViewSecond.alpha = 0;
         }
 
+        if (self.imageViewThatMoves) {
+            self.imageViewThatMoves.transform = CGAffineTransformMakeScale(3, 3);
+            self.imageViewThatMoves.alpha = 0;
+        }
+
         self.transform = CGAffineTransformMakeScale(3, 3);
         self.alpha = 0;
     } completion:^(BOOL finished) {
@@ -305,6 +309,10 @@
 
         if (self.staticImageViewSecond) {
             [self.staticImageViewSecond removeFromSuperview];
+        }
+
+        if (self.imageViewThatMoves) {
+            [self.imageViewThatMoves removeFromSuperview];
         }
 
         [self removeFromSuperview];
@@ -403,7 +411,7 @@
     CGFloat floatValueHeight = (self.frameToGo.size.height - self.initialFrame.size.height)/self.frame.size.width;
     CGFloat floatValueWidth = (self.frameToGo.size.width - self.initialFrame.size.width)/self.frame.size.width;
 
-    if (self.pageToPerformFirstAnimation == (int)page) {
+    if (self.pageToPerformSecondAnimation == (int)page) {
         self.imageViewThatMoves.frame = CGRectMake(self.initialFrame.origin.x + self.scrollOffset*floatValueX, self.initialFrame.origin.y + self.scrollOffset*floatValue, self.initialFrame.size.width + self.scrollOffset*floatValueWidth, self.initialFrame.size.height + self.scrollOffset*floatValueHeight);
     }
 
