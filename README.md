@@ -1,3 +1,5 @@
+![RGDynamicOnboard](https://github.com/RamonGilabert/RGDynamicOnboard/blob/master/Resources/Header.png)
+
 ## RGDynamicOnboard
 
 A nicely dynamic slideshow to present whatever you want, just add an image, some text and choose one of the animations, RGDynamicOnboard will take care of the rest. There are multiple ways to customize your slide show, add static images, images that go from a page to another, add text, choose the font and some colors and, with just 5 lines of code, you have a fully responsive slideshow!
