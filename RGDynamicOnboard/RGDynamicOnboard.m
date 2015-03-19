@@ -14,6 +14,8 @@
 @property (strong, nonatomic) NSMutableArray *arrayWithSlides;
 @property (strong, nonatomic) NSMutableArray *arrayOfAnimations;
 @property (strong, nonatomic) NSMutableArray *arrayWithImagesAnimation;
+@property (strong, nonatomic) NSMutableArray *arrayWithImages;
+@property (strong, nonatomic) NSMutableArray *arrayWithImagesPages;
 @property (weak, nonatomic) NSNumber *firstPageFirst;
 @property (weak, nonatomic) NSNumber *firstPageSecond;
 @property (weak, nonatomic) NSNumber *secondPageFirst;
@@ -52,6 +54,9 @@
 
     self.arrayWithSlides = [NSMutableArray new];
     self.arrayOfAnimations = [NSMutableArray new];
+    self.arrayWithImages = [NSMutableArray new];
+    self.arrayWithImagesAnimation = [NSMutableArray new];
+    self.arrayWithImagesPages = [NSMutableArray new];
 
     for (int i = 0; i < slides; i++) {
         [self.arrayWithSlides addObject:[NSNull null]];
@@ -142,6 +147,10 @@
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:frame];
     imageView.contentMode = UIViewContentModeScaleAspectFill;
     imageView.image = image;
+
+    [self.arrayWithImagesPages addObject:[NSNumber numberWithInt:page]];
+    [self.arrayWithImagesAnimation addObject:[NSNumber numberWithInt:animation]];
+    [self.arrayWithImages addObject:imageView];
 
     [view addSubview:imageView];
 }
