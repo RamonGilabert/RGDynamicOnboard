@@ -5,6 +5,7 @@
 @property (strong, nonatomic) UIColor *backgroundColorAllScrollView;
 @property (strong, nonatomic) UIColor *dismissButtonCornerColor;
 @property (strong, nonatomic) UIColor *dismissButtonFontColor;
+@property (strong, nonatomic) UIColor *dismissButtonBackgroundColor;
 
 - (instancetype)initFullscreenWithNumberOfSlides:(int)slides andPageControl:(BOOL)pageControl inView:(UIView *)view;
 
@@ -15,7 +16,7 @@
 - (void)addStaticImage:(UIImage *)image inFrame:(CGRect)frame;
 - (void)addStaticImage:(UIImage *)image inPosition:(int)position fromPage:(int)firstPage toPage:(int)secondPage withAnimationAppearance:(int)animationOption;
 
-- (void)addText:(NSString *)string inPage:(int)page;
+- (void)addText:(NSString *)string inPage:(int)page withFontColor:(UIColor *)color;
 - (void)addText:(NSString *)string inPage:(int)page withColor:(UIColor *)color;
 
 - (void)addBackgroundImage:(UIImage *)image;

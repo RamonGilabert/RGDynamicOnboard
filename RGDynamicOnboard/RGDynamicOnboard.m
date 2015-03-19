@@ -137,6 +137,11 @@
     [self.buttonDismiss setTitleColor:dismissButtonFontColor forState:UIControlStateNormal];
 }
 
+- (void)setDismissButtonBackgroundColor:(UIColor *)dismissButtonBackgroundColor
+{
+    self.buttonDismiss.backgroundColor = dismissButtonBackgroundColor;
+}
+
 - (void)addImage:(UIImage *)image inFrame:(CGRect)frame inPage:(int)page withAnimation:(int)animation
 {
     if (page >= self.numberOfPages) return;
@@ -174,6 +179,7 @@
 
     UILabel *label = [[UILabel alloc] initWithFrame:frame];
     label.text = text;
+    label.numberOfLines = 10;
     label.textColor = [UIColor darkGrayColor];
     label.textAlignment = NSTextAlignmentCenter;
     label.font = [UIFont fontWithName:@"Helvetica" size:22];
@@ -194,6 +200,7 @@
 
     UILabel *label = [[UILabel alloc] initWithFrame:frame];
     label.text = text;
+    label.numberOfLines = 10;
     label.textColor = [UIColor darkGrayColor];
     label.textAlignment = NSTextAlignmentCenter;
     label.font = font;
@@ -214,6 +221,7 @@
 
     UILabel *label = [[UILabel alloc] initWithFrame:frame];
     label.text = text;
+    label.numberOfLines = 10;
     label.textColor = color;
     label.textAlignment = NSTextAlignmentCenter;
     label.font = font;
@@ -225,7 +233,7 @@
 {
     if (image) {
         self.imageViewThatMoves = [[UIImageView alloc] initWithFrame:initialFrame];
-        self.imageViewThatMoves.contentMode = UIViewContentModeScaleAspectFill;
+        self.imageViewThatMoves.contentMode = UIViewContentModeScaleAspectFit;
         self.imageViewThatMoves.image = image;
         self.frameToGo = secondFrame;
         self.pageToPerformFirstAnimation = page;
@@ -256,6 +264,7 @@
 
         self.pageControl.currentPageIndicatorTintColor = [UIColor whiteColor];
         self.pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
+        [self.viewMain bringSubviewToFront:self.pageControl];
 
         self.buttonDismiss.layer.borderColor = [UIColor whiteColor].CGColor;
         [self.buttonDismiss setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -592,19 +601,21 @@
             imageViewToAnimate.frame = CGRectMake((self.deviceWidth - (self.deviceWidth/3))/2 + self.scrollOffset/1.5, self.deviceHeight/2 - self.deviceHeight/3 + 40 - realLocation, imageViewToAnimate.frame.size.width, imageViewToAnimate.frame.size.height);
 
             if (imageViewToAnimateFollowingPage && (self.arrayOfAnimations.count >= page + 2)) {
-                if ([self.arrayOfAnimations[page + 1] intValue] == 0) {
-                    if (self.scrollOffset + 20 > self.frame.size.width) {
-                        imageViewToAnimateFollowingPage.frame = CGRectMake(imageViewToAnimateFollowingPage.frame.origin.x, self.deviceHeight/2 - self.deviceHeight/3 + 40, imageViewToAnimateFollowingPage.frame.size.width, imageViewToAnimateFollowingPage.frame.size.height);
-                    } else {
-                        imageViewToAnimateFollowingPage.frame = CGRectMake(imageViewToAnimateFollowingPage.frame.origin.x, - self.frame.size.width + self.scrollOffset * 1.5, imageViewToAnimateFollowingPage.frame.size.width, imageViewToAnimateFollowingPage.frame.size.height);
-                    }
-                } else if ([self.arrayOfAnimations[page + 1] intValue] == 1) {
-                    if (self.scrollOffset > self.frame.size.width) {
-                        imageViewToAnimateFollowingPage.transform = CGAffineTransformMakeScale(1 - (realLocation/self.frame.size.width), 1 - (realLocation/self.frame.size.width));
-                        imageViewToAnimateFollowingPage.frame = CGRectMake((self.deviceWidth - (self.deviceWidth/3))/2 + realLocation/1.5, imageViewToAnimateFollowingPage.frame.origin.y, imageViewToAnimateFollowingPage.frame.size.width, imageViewToAnimateFollowingPage.frame.size.height);
-                    } else {
-                        imageViewToAnimateFollowingPage.transform = CGAffineTransformMakeScale(realLocation/self.frame.size.width, realLocation/self.frame.size.width);
-                        imageViewToAnimateFollowingPage.frame = CGRectMake((self.deviceWidth - (self.deviceWidth/3))/2 - realLocation/1.5, imageViewToAnimateFollowingPage.frame.origin.y, imageViewToAnimateFollowingPage.frame.size.width, imageViewToAnimateFollowingPage.frame.size.height);
+                if (![self.arrayOfAnimations[page + 1] isKindOfClass:[NSNull class]]) {
+                    if ([self.arrayOfAnimations[page + 1] intValue] == 0) {
+                        if (self.scrollOffset + 20 > self.frame.size.width) {
+                            imageViewToAnimateFollowingPage.frame = CGRectMake(imageViewToAnimateFollowingPage.frame.origin.x, self.deviceHeight/2 - self.deviceHeight/3 + 40, imageViewToAnimateFollowingPage.frame.size.width, imageViewToAnimateFollowingPage.frame.size.height);
+                        } else {
+                            imageViewToAnimateFollowingPage.frame = CGRectMake(imageViewToAnimateFollowingPage.frame.origin.x, - self.frame.size.width + self.scrollOffset * 1.5, imageViewToAnimateFollowingPage.frame.size.width, imageViewToAnimateFollowingPage.frame.size.height);
+                        }
+                    } else if ([self.arrayOfAnimations[page + 1] intValue] == 1) {
+                        if (self.scrollOffset > self.frame.size.width) {
+                            imageViewToAnimateFollowingPage.transform = CGAffineTransformMakeScale(1 - (realLocation/self.frame.size.width), 1 - (realLocation/self.frame.size.width));
+                            imageViewToAnimateFollowingPage.frame = CGRectMake((self.deviceWidth - (self.deviceWidth/3))/2 + realLocation/1.5, imageViewToAnimateFollowingPage.frame.origin.y, imageViewToAnimateFollowingPage.frame.size.width, imageViewToAnimateFollowingPage.frame.size.height);
+                        } else {
+                            imageViewToAnimateFollowingPage.transform = CGAffineTransformMakeScale(realLocation/self.frame.size.width, realLocation/self.frame.size.width);
+                            imageViewToAnimateFollowingPage.frame = CGRectMake((self.deviceWidth - (self.deviceWidth/3))/2 - realLocation/1.5, imageViewToAnimateFollowingPage.frame.origin.y, imageViewToAnimateFollowingPage.frame.size.width, imageViewToAnimateFollowingPage.frame.size.height);
+                        }
                     }
                 }
             }

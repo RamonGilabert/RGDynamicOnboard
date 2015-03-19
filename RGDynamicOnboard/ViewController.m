@@ -29,12 +29,12 @@
 
 #pragma mark - First example
 
-    [self.mainSlideView addImage:[UIImage imageNamed:@"firstImage"] andText:@"Just like magic, add two lines of code and that's it..." toPageNumber:0];
-    [self.mainSlideView applyAnimationNumber:0 toGoFromPage:0];
-    [self.mainSlideView addImage:[UIImage imageNamed:@"secondImage"] andText:@"With multiple animations and some more options!" toPageNumber:1];
-    [self.mainSlideView applyAnimationNumber:0 toGoFromPage:1];
-    [self.mainSlideView addImage:[UIImage imageNamed:@"thirdImage"] andText:@"And some more customization is coming!" toPageNumber:2];
-    [self.mainSlideView applyAnimationNumber:0 toGoFromPage:2];
+//    [self.mainSlideView addImage:[UIImage imageNamed:@"firstImage"] andText:@"Just like magic, add two lines of code and that's it..." toPageNumber:0];
+//    [self.mainSlideView applyAnimationNumber:0 toGoFromPage:0];
+//    [self.mainSlideView addImage:[UIImage imageNamed:@"secondImage"] andText:@"With multiple animations and some more options!" toPageNumber:1];
+//    [self.mainSlideView applyAnimationNumber:0 toGoFromPage:1];
+//    [self.mainSlideView addImage:[UIImage imageNamed:@"thirdImage"] andText:@"And some more customization is coming!" toPageNumber:2];
+//    [self.mainSlideView applyAnimationNumber:0 toGoFromPage:2];
 
 #pragma mark - Second example
 
@@ -73,6 +73,16 @@
 //    [self.mainSlideView applyAnimationNumber:1 toGoFromPage:1];
 //    [self.mainSlideView addImage:[UIImage imageNamed:@"thirdImage"] andText:@"And some more customization is coming!" toPageNumber:2];
 //    [self.mainSlideView applyAnimationNumber:0 toGoFromPage:2];
+
+#pragma mark - Eighth example
+
+    [self.mainSlideView addBackgroundImage:[UIImage imageNamed:@"background"]];
+    [self.mainSlideView addEditableStaticImage:[UIImage imageNamed:@"welcomeImage"] inPage:0 inFrame:CGRectMake(50, self.deviceHeight/3, self.deviceWidth - 100, 150) andGoToFrame:CGRectMake(100, 25, self.deviceWidth - 200, 100) toPage:1];
+    [self.mainSlideView addImage:[UIImage imageNamed:@"fourthImage"] inFrame:CGRectMake((self.deviceWidth - 200)/2, (self.deviceHeight - 200)/2 - 50, 200, 200) inPage:1 withAnimation:1];
+    [self.mainSlideView addString:@"Just like magic, just with 4 lines of code..." andFont:[UIFont fontWithName:@"AvenirNextCondensed-DemiBold" size:24] andTextColor:[UIColor whiteColor] inFrame:CGRectMake(50, self.deviceHeight - 280, self.deviceWidth - 100, 200) inPage:1 withAnimation:0];
+    [self.mainSlideView image:[UIImage imageNamed:@"welcomeImage"] toGoFromPage:1 toFrame:CGRectMake(50, self.deviceHeight/3, self.deviceWidth - 100, 150)];
+    
+
 
 }
 
