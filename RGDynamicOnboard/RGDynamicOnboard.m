@@ -570,6 +570,7 @@
                         imageViewToAnimateFollowingPage.frame = CGRectMake((self.deviceWidth - (self.deviceWidth/3))/2 + realLocation/1.5, imageViewToAnimateFollowingPage.frame.origin.y, imageViewToAnimateFollowingPage.frame.size.width, imageViewToAnimateFollowingPage.frame.size.height);
                     } else {
                         imageViewToAnimateFollowingPage.transform = CGAffineTransformMakeScale(realLocation/self.frame.size.width, realLocation/self.frame.size.width);
+                        imageViewToAnimateFollowingPage.frame = CGRectMake((self.deviceWidth - (self.deviceWidth/3))/2 - realLocation/1.5, imageViewToAnimateFollowingPage.frame.origin.y, imageViewToAnimateFollowingPage.frame.size.width, imageViewToAnimateFollowingPage.frame.size.height);
                     }
                 }
             }
@@ -582,7 +583,6 @@
                 imageViewToAnimateFollowingPage.frame = CGRectMake((self.deviceWidth - (self.deviceWidth/3))/2 + realLocation/1.5, imageViewToAnimateFollowingPage.frame.origin.y, imageViewToAnimateFollowingPage.frame.size.width, imageViewToAnimateFollowingPage.frame.size.height);
             } else {
                 imageViewToAnimate.transform = CGAffineTransformMakeScale(1 - (realLocation/self.frame.size.width), 1 - (realLocation/self.frame.size.width));
-                imageViewToAnimate.frame = CGRectMake((self.deviceWidth - (self.deviceWidth/3))/2 + realLocation/1.5, imageViewToAnimate.frame.origin.y, imageViewToAnimate.frame.size.width, imageViewToAnimate.frame.size.height);
             }
 
             if (imageViewToAnimateFollowingPage && (self.arrayOfAnimations.count >= page + 2)) {
