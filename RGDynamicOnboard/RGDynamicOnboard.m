@@ -2,33 +2,34 @@
 
 @interface RGDynamicOnboard () <UIScrollViewDelegate>
 
-@property CGFloat deviceWidth;
-@property CGFloat deviceHeight;
 @property (strong, nonatomic) UIPageControl *pageControl;
 @property (strong, nonatomic) UIWindow *mainView;
 @property (strong, nonatomic) UIColor *colorSlide;
 @property (strong, nonatomic) UIView *viewMain;
-@property int numberOfPages;
-@property NSMutableArray *arrayWithSlides;
-@property NSMutableArray *arrayOfAnimations;
-@property CGFloat scrollOffset;
 @property (strong, nonatomic) UIButton *buttonDismiss;
 @property (strong, nonatomic) UIImageView *staticImageView;
 @property (strong, nonatomic) UIImageView *staticImageViewSecond;
 @property (strong, nonatomic) UIImageView *backgroundImageView;
+@property (strong, nonatomic) UIImageView *imageViewThatMoves;
+@property (strong, nonatomic) NSMutableArray *arrayWithSlides;
+@property (strong, nonatomic) NSMutableArray *arrayOfAnimations;
+@property (strong, nonatomic) NSMutableArray *arrayWithImagesAnimation;
 @property (weak, nonatomic) NSNumber *firstPageFirst;
 @property (weak, nonatomic) NSNumber *firstPageSecond;
 @property (weak, nonatomic) NSNumber *secondPageFirst;
 @property (weak, nonatomic) NSNumber *secondPageSecond;
-@property int animationStaticImage;
-@property int animationStaticImageSecond;
-@property (strong, nonatomic) UIImageView *imageViewThatMoves;
-@property int pageToPerformFirstAnimation;
-@property int pageToPerformSecondAnimation;
 @property CGRect frameToGo;
 @property CGRect initialFrame;
 @property CGRect initialFrameOnceAnimationDone;
 @property CGRect finalFrameOnceAnimationDone;
+@property CGFloat deviceWidth;
+@property CGFloat deviceHeight;
+@property CGFloat scrollOffset;
+@property int numberOfPages;
+@property int animationStaticImage;
+@property int animationStaticImageSecond;
+@property int pageToPerformFirstAnimation;
+@property int pageToPerformSecondAnimation;
 @property int pageToPerformThirdAnimation;
 
 @end

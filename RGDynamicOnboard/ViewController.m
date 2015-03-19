@@ -63,16 +63,16 @@
 
 #pragma mark - Sixth example
 
-//    [self.mainSlideView addImage:[UIImage imageNamed:@"firstImage"] inFrame:CGRectMake((self.deviceWidth - 200)/2, 200, 200, 200) inPage:1 withAnimation:0];
+    [self.mainSlideView addImage:[UIImage imageNamed:@"firstImage"] inFrame:CGRectMake((self.deviceWidth - 200)/2, 200, 200, 200) inPage:1 withAnimation:0];
 
 #pragma mark - Seventh example
 
-    [self.mainSlideView addImage:[UIImage imageNamed:@"firstImage"] andText:@"Just like magic, add two lines of code and that's it..." toPageNumber:0];
-    [self.mainSlideView applyAnimationNumber:1 toGoFromPage:0];
-    [self.mainSlideView addImage:[UIImage imageNamed:@"secondImage"] andText:@"With multiple animations and some more options!" toPageNumber:1];
-    [self.mainSlideView applyAnimationNumber:1 toGoFromPage:1];
-    [self.mainSlideView addImage:[UIImage imageNamed:@"thirdImage"] andText:@"And some more customization is coming!" toPageNumber:2];
-    [self.mainSlideView applyAnimationNumber:0 toGoFromPage:2];
+//    [self.mainSlideView addImage:[UIImage imageNamed:@"firstImage"] andText:@"Just like magic, add two lines of code and that's it..." toPageNumber:0];
+//    [self.mainSlideView applyAnimationNumber:1 toGoFromPage:0];
+//    [self.mainSlideView addImage:[UIImage imageNamed:@"secondImage"] andText:@"With multiple animations and some more options!" toPageNumber:1];
+//    [self.mainSlideView applyAnimationNumber:1 toGoFromPage:1];
+//    [self.mainSlideView addImage:[UIImage imageNamed:@"thirdImage"] andText:@"And some more customization is coming!" toPageNumber:2];
+//    [self.mainSlideView applyAnimationNumber:0 toGoFromPage:2];
 
 }
 
