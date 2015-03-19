@@ -39,7 +39,9 @@ Add static images, text and customize your colors.
 
 ## Example
 
+![RGDynamicOnboard](https://github.com/RamonGilabert/RGDynamicOnboard/blob/master/Resources/AppFirst.gif)
 
+![RGDynamicOnboard](https://github.com/RamonGilabert/RGDynamicOnboard/blob/master/Resources/AppSecond.gif)
 
 ## Upcoming features
 
