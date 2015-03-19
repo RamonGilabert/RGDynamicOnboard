@@ -86,6 +86,20 @@
     return self;
 }
 
+- (void)addBackgroundColor:(UIColor *)color inPage:(int)page
+{
+    if (page >= self.numberOfPages) return;
+
+    UIView *view = [self.arrayWithSlides objectAtIndex:page];
+
+    if ((NSNull *)view == [NSNull null]) {
+        view = [UIView new];
+        [self.arrayWithSlides replaceObjectAtIndex:page withObject:view];
+    }
+
+    view.backgroundColor = color;
+}
+
 - (void)setBackgroundColorAllScrollView:(UIColor *)backgroundColorAllScrollView
 {
     self.viewMain.backgroundColor = backgroundColorAllScrollView;
