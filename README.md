@@ -2,19 +2,21 @@
 
 ## RGDynamicOnboard
 
-A nicely dynamic slideshow to present whatever you want, just add an image, some text and choose one of the animations, RGDynamicOnboard will take care of the rest.
+A nicely dynamic slideshow to present whatever you want, just add an image, some text and choose one of the animations, RGDynamicOnboard will take care of the rest. There are multiple ways to customize your slide show, add static images, images that go from a page to another, add text, choose the font and some colors and, with just 5 lines of code, you have a fully responsive slideshow!
 
 ## Featuring
 
 - As easy as entering a string and choosing some animations.
 - For all devices, calculated sizes dinamically.
+- Multiple options of customization.
+- Do more, write less.
+- Animations calculated dinamically.
+- Animations going left or right.
+- Not all pages loaded at the same time, less memory space.
 
 ## Upcoming features
 
 - Add more animations to the table.
-- Add a static image and things keep changing.
-- Add the option bring one view to the second layer.
-- Add more options of customization, a title, more images, background color.
 
 ## Contributing
 
