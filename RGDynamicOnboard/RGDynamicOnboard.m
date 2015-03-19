@@ -556,10 +556,50 @@
     if (![self.arrayOfAnimations[page] isKindOfClass:[NSNull class]]) {
         if ([self.arrayOfAnimations[page] intValue] == 0) {
             imageViewToAnimate.frame = CGRectMake((self.deviceWidth - (self.deviceWidth/3))/2 + self.scrollOffset/1.5, self.deviceHeight/2 - self.deviceHeight/3 + 40 - realLocation, imageViewToAnimate.frame.size.width, imageViewToAnimate.frame.size.height);
-            if (self.scrollOffset + 20 > self.frame.size.width) {
-                imageViewToAnimateFollowingPage.frame = CGRectMake(imageViewToAnimateFollowingPage.frame.origin.x, self.deviceHeight/2 - self.deviceHeight/3 + 40, imageViewToAnimateFollowingPage.frame.size.width, imageViewToAnimateFollowingPage.frame.size.height);
+
+            if (imageViewToAnimateFollowingPage && (self.arrayOfAnimations.count >= page + 2)) {
+                if ([self.arrayOfAnimations[page + 1] intValue] == 0) {
+                    if (self.scrollOffset + 20 > self.frame.size.width) {
+                        imageViewToAnimateFollowingPage.frame = CGRectMake(imageViewToAnimateFollowingPage.frame.origin.x, self.deviceHeight/2 - self.deviceHeight/3 + 40, imageViewToAnimateFollowingPage.frame.size.width, imageViewToAnimateFollowingPage.frame.size.height);
+                    } else {
+                        imageViewToAnimateFollowingPage.frame = CGRectMake(imageViewToAnimateFollowingPage.frame.origin.x, - self.frame.size.width + self.scrollOffset * 1.5, imageViewToAnimateFollowingPage.frame.size.width, imageViewToAnimateFollowingPage.frame.size.height);
+                    }
+                } else if ([self.arrayOfAnimations[page + 1] intValue] == 1) {
+                    if (self.scrollOffset > self.frame.size.width) {
+                        imageViewToAnimateFollowingPage.transform = CGAffineTransformMakeScale(1 - (realLocation/self.frame.size.width), 1 - (realLocation/self.frame.size.width));
+                        imageViewToAnimateFollowingPage.frame = CGRectMake((self.deviceWidth - (self.deviceWidth/3))/2 + realLocation/1.5, imageViewToAnimateFollowingPage.frame.origin.y, imageViewToAnimateFollowingPage.frame.size.width, imageViewToAnimateFollowingPage.frame.size.height);
+                    } else {
+                        imageViewToAnimateFollowingPage.transform = CGAffineTransformMakeScale(realLocation/self.frame.size.width, realLocation/self.frame.size.width);
+                    }
+                }
+            }
+        } else if ([self.arrayOfAnimations[page] intValue] == 1) {
+            if (self.scrollOffset > self.frame.size.width) {
+                imageViewToAnimate.transform = CGAffineTransformMakeScale(realLocation/self.frame.size.width, realLocation/self.frame.size.width);
+                imageViewToAnimate.frame = CGRectMake((self.deviceWidth - (self.deviceWidth/3))/2 + realLocation/1.5, imageViewToAnimate.frame.origin.y, imageViewToAnimate.frame.size.width, imageViewToAnimate.frame.size.height);
+
+                imageViewToAnimateFollowingPage.transform = CGAffineTransformMakeScale(1 - (realLocation/self.frame.size.width), 1 - (realLocation/self.frame.size.width));
+                imageViewToAnimateFollowingPage.frame = CGRectMake((self.deviceWidth - (self.deviceWidth/3))/2 + realLocation/1.5, imageViewToAnimateFollowingPage.frame.origin.y, imageViewToAnimateFollowingPage.frame.size.width, imageViewToAnimateFollowingPage.frame.size.height);
             } else {
-                imageViewToAnimateFollowingPage.frame = CGRectMake(imageViewToAnimateFollowingPage.frame.origin.x, - self.frame.size.width + self.scrollOffset * 1.5, imageViewToAnimateFollowingPage.frame.size.width, imageViewToAnimateFollowingPage.frame.size.height);
+                imageViewToAnimate.transform = CGAffineTransformMakeScale(1 - (realLocation/self.frame.size.width), 1 - (realLocation/self.frame.size.width));
+                imageViewToAnimate.frame = CGRectMake((self.deviceWidth - (self.deviceWidth/3))/2 + realLocation/1.5, imageViewToAnimate.frame.origin.y, imageViewToAnimate.frame.size.width, imageViewToAnimate.frame.size.height);
+            }
+
+            if (imageViewToAnimateFollowingPage && (self.arrayOfAnimations.count >= page + 2)) {
+                if ([self.arrayOfAnimations[page + 1] intValue] == 0) {
+                    if (self.scrollOffset + 20 > self.frame.size.width) {
+                        imageViewToAnimateFollowingPage.frame = CGRectMake(imageViewToAnimateFollowingPage.frame.origin.x, self.deviceHeight/2 - self.deviceHeight/3 + 40, imageViewToAnimateFollowingPage.frame.size.width, imageViewToAnimateFollowingPage.frame.size.height);
+                    } else {
+                        imageViewToAnimateFollowingPage.frame = CGRectMake(imageViewToAnimateFollowingPage.frame.origin.x, - self.frame.size.width + self.scrollOffset * 1.5, imageViewToAnimateFollowingPage.frame.size.width, imageViewToAnimateFollowingPage.frame.size.height);
+                    }
+                } else if ([self.arrayOfAnimations[page + 1] intValue] == 1) {
+                    if (self.scrollOffset > self.frame.size.width) {
+                        imageViewToAnimateFollowingPage.transform = CGAffineTransformMakeScale(1 - (realLocation/self.frame.size.width), 1 - (realLocation/self.frame.size.width));
+                        imageViewToAnimateFollowingPage.frame = CGRectMake((self.deviceWidth - (self.deviceWidth/3))/2 + realLocation/1.5, imageViewToAnimateFollowingPage.frame.origin.y, imageViewToAnimateFollowingPage.frame.size.width, imageViewToAnimateFollowingPage.frame.size.height);
+                    } else {
+                        imageViewToAnimateFollowingPage.transform = CGAffineTransformMakeScale(realLocation/self.frame.size.width, realLocation/self.frame.size.width);
+                    }
+                }
             }
         }
     }
