@@ -16,6 +16,8 @@
 @property (strong, nonatomic) NSMutableArray *arrayWithImagesAnimation;
 @property (strong, nonatomic) NSMutableArray *arrayWithImages;
 @property (strong, nonatomic) NSMutableArray *arrayWithImagesPages;
+@property (strong, nonatomic) NSMutableArray *arrayOfFrames;
+@property (strong, nonatomic) NSMutableArray *arrayOfFramesX;
 @property (weak, nonatomic) NSNumber *firstPageFirst;
 @property (weak, nonatomic) NSNumber *firstPageSecond;
 @property (weak, nonatomic) NSNumber *secondPageFirst;
@@ -57,6 +59,8 @@
     self.arrayWithImages = [NSMutableArray new];
     self.arrayWithImagesAnimation = [NSMutableArray new];
     self.arrayWithImagesPages = [NSMutableArray new];
+    self.arrayOfFrames = [NSMutableArray new];
+    self.arrayOfFramesX = [NSMutableArray new];
 
     for (int i = 0; i < slides; i++) {
         [self.arrayWithSlides addObject:[NSNull null]];
@@ -151,6 +155,8 @@
     [self.arrayWithImagesPages addObject:[NSNumber numberWithInt:page]];
     [self.arrayWithImagesAnimation addObject:[NSNumber numberWithInt:animation]];
     [self.arrayWithImages addObject:imageView];
+    [self.arrayOfFrames addObject:[NSNumber numberWithFloat:imageView.frame.origin.y]];
+    [self.arrayOfFramesX addObject:[NSNumber numberWithFloat:imageView.frame.origin.x]];
 
     [view addSubview:imageView];
 }
@@ -541,6 +547,24 @@
                 labelToAnimateFollowingPage = (UILabel *)viewWeTake;
             } else if ([viewWeTake isKindOfClass:[UIImageView class]]) {
                 imageViewToAnimateFollowingPage = (UIImageView *)viewWeTake;
+            }
+        }
+    }
+
+    for (NSNumber *number in self.arrayWithImagesPages) {
+        if ([number intValue] == page) {
+            int indexOfPage = (int)[self.arrayWithImagesPages indexOfObject:number];
+            UIImageView *imageView = self.arrayWithImages[indexOfPage];
+
+            if ([self.arrayWithImagesAnimation[indexOfPage] isEqual:[NSNumber numberWithInt:0]]) {
+                imageView.frame = CGRectMake([self.arrayOfFramesX[indexOfPage] floatValue] + self.scrollOffset/1.5, [self.arrayOfFrames[indexOfPage] floatValue] - self.scrollOffset*1.5, imageView.frame.size.width, imageView.frame.size.height);
+            }
+        } else if ([number intValue] == page + 1) {
+            int indexOfPage = (int)[self.arrayWithImagesPages indexOfObject:number];
+            UIImageView *imageView = self.arrayWithImages[indexOfPage];
+
+            if ([self.arrayWithImagesAnimation[indexOfPage] isEqual:[NSNumber numberWithInt:0]]) {
+                imageView.frame = CGRectMake([self.arrayOfFramesX[indexOfPage] floatValue] - (self.frame.size.width - self.scrollOffset)/1.5, [self.arrayOfFrames[indexOfPage] floatValue] - (self.frame.size.width - self.scrollOffset)*1.5, imageView.frame.size.width, imageView.frame.size.height);
             }
         }
     }
